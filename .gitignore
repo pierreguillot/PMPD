@@ -1,4 +1,3 @@
-*.wav
 *.png
 *.pdf
 *.docx
@@ -6,3 +5,5 @@
 *.html
 *.thmx
 /Rendus
+/Sounds
+/Intern
