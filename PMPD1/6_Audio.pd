@@ -1,0 +1,31 @@
+#N canvas 189 176 781 629 12;
+#X text 497 23 Tips : Pour faire un ~ sur Mac \, il faut faire alt+n
+puis espace., f 31;
+#X obj 68 141 adc~ 1, f 9;
+#X obj 68 216 *~ 0.5;
+#X obj 68 321 dac~ 1 2;
+#X text 127 216 Multiplie le signal par 0.5 pour diminuer de moitié
+l'amplitude., f 32;
+#X msg 66 473 \; pd dsp 1;
+#X msg 67 528 \; pd dsp 0;
+#X text 72 407 Dans Pure Data \, pour allumer ou éteindre l'audio
+il faut soir cliquer sur le bouton DSP dans la fenêtre de la console.
+Soit utiliser ces deux messages.;
+#X text 139 482 On;
+#X text 139 536 Off;
+#X text 284 487 Dans Max \, il faut envoyer un message "start" ou "stop"
+dans les objets dac~ ou adc~., f 29;
+#X text 153 312 Les sorties casques ou haut-parleurs \, les arguments
+sont les numéros des sorties., f 38;
+#X text 153 132 Les entrées microphones \, les arguments sont les
+numéros des entrées., f 38;
+#X text 34 101 ADC = Audio to digital converter;
+#X text 34 371 DAC = Digital to audio converter;
+#X text 73 582 Attention au Larsen !!!!;
+#X text 24 14 Il existe deux types d'objets dans Max et PD \, les objets
+"control" qu'on vient de voir et les objets "signal" qui permettent
+de réaliser des opérations sur du signal audionumérique \, ils finissent
+par tous le signe ~ (tilde).;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;

@@ -1,0 +1,55 @@
+#N canvas 39 25 1168 528 12;
+#X obj 626 457 print;
+#X msg 28 147 Ceci est un message;
+#X msg 208 147 12.6;
+#X msg 268 147 Zaza 12.6 zozo;
+#X text 25 186 • L'objet \, une boite qui peut avoir de nombreuses
+fonctions telles que générer ou transformer des messages. Il peut
+recevoir des messages dans ses entrées (inlet) et envoyer des messages
+par ses sorties (outlets). Exemples :, f 67;
+#X obj 27 259 print;
+#X obj 87 259 +;
+#X obj 137 259 -;
+#X obj 187 259 int;
+#X text 25 16 Dans Pure Data et Max \, nous travaillons sur une page
+blanche qui s'appelle un patch. Dans ce patch nous pouvons créer des
+boites. Il y a quatre principaux types de boites :, f 67;
+#X text 25 346 Je suis un commentaire !, f 25;
+#X text 235 346 Et au dessus aussi !;
+#X text 25 296 • Le commentaire \, un texte qui ne fait rien à part
+donner des informations très utiles pour celui qui va lire et tenter
+de comprendre comment fonctionne un patch. Exemple :, f 67;
+#X text 25 76 • Le message \, une boite qui répond au click de la
+souris en envoyant son contenu par la sortie (outlet) gauche de la
+boite. Le contenu peut être un mot (symbol) \, un nombre (float) ou
+une série de mots et de nombres (list). Exemples :, f 67;
+#X floatatom 28 442 5 0 0 0 - - -, f 5;
+#X symbolatom 105 443 10 0 0 0 - - -, f 10;
+#X obj 841 150 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 43.68 256;
+#X symbolatom 895 251 10 0 0 0 - - -, f 10;
+#X text 676 45 Exemple :;
+#X obj 213 444 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 25 386 • Le GUI (graphical user interface) \, une boite graphique
+qui répond à la souris ou au clavier en changeant ou envoyant son
+contenu telle une boite nombre \, une boite symbol ou un bang. Exemple
+:, f 67;
+#X text 679 447 Cet objet "print" envoie les messages qu'il reçoit
+dans la console., f 31;
+#X msg 626 147 Moi je suis un message;
+#X obj 907 366 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 625 89 Message \, clique sur le message pour envoyer son contenu
+via sa sortie., f 25;
+#X text 843 80 Boite nombre \, clique et tire la boite pour modifier
+la valeur et envoyer le nombre via sa sortie, f 27;
+#X text 887 169 Boite symbol \, clique et tape un mot pour changer
+le texte. Appuie sur entrée pour valider et envoyer son contenu via
+sa sortie., f 29;
+#X text 897 279 Boite bang \, clique pour envoyer un message "bang"
+via sa sortie., f 17;
+#X connect 16 0 0 0;
+#X connect 17 0 0 0;
+#X connect 22 0 0 0;
+#X connect 23 0 0 0;

@@ -1,0 +1,64 @@
+#N canvas 928 42 441 525 12;
+#X msg 250 49 \; pd dsp 1;
+#X msg 251 104 \; pd dsp 0;
+#X obj 49 249 + 1, f 5;
+#X obj 173 225 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 220 256;
+#X obj 48 378 +~;
+#X obj 49 191 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 1 256;
+#X obj 173 250 osc~ 220, f 9;
+#X obj 49 308 osc~ 221, f 9;
+#X obj 49 210 t b f;
+#X msg 62 83 220;
+#X obj 102 39 loadbang;
+#X obj 49 282 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 221 256;
+#X text 10 15 Battements par modulation d'amplitude;
+#X obj 289 268 osc~ 221, f 9;
+#X obj 289 212 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 1 256;
+#X obj 268 378 *~;
+#X obj 289 293 +~ 1;
+#X obj 289 318 *~ 0.5;
+#X obj 289 181 r beat;
+#X obj 49 163 r beat;
+#X obj 62 131 s freq;
+#X obj 173 197 r freq;
+#X obj 62 109 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 220 256;
+#X obj 142 109 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 1 256;
+#X msg 142 83 1;
+#X obj 142 131 s beat;
+#X obj 268 404 GainMono~;
+#X obj 48 403 GainMono~;
+#X obj 268 456 dac~ 2;
+#X obj 48 467 dac~ 1;
+#X connect 2 0 11 0;
+#X connect 3 0 2 0;
+#X connect 3 0 6 0;
+#X connect 4 0 27 0;
+#X connect 5 0 8 0;
+#X connect 6 0 4 1;
+#X connect 6 0 15 0;
+#X connect 7 0 4 0;
+#X connect 8 0 2 0;
+#X connect 8 1 2 1;
+#X connect 9 0 22 0;
+#X connect 10 0 9 0;
+#X connect 10 0 24 0;
+#X connect 11 0 7 0;
+#X connect 13 0 16 0;
+#X connect 14 0 13 0;
+#X connect 15 0 26 0;
+#X connect 16 0 17 0;
+#X connect 17 0 15 1;
+#X connect 18 0 14 0;
+#X connect 19 0 5 0;
+#X connect 21 0 3 0;
+#X connect 22 0 20 0;
+#X connect 23 0 25 0;
+#X connect 24 0 23 0;
+#X connect 26 0 28 0;
+#X connect 27 0 29 0;

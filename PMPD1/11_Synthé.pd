@@ -1,0 +1,43 @@
+#N canvas 233 29 1139 761 12;
+#X obj 106 446 dac~ 1 2;
+#X msg 417 21 \; pd dsp 1;
+#X msg 418 76 \; pd dsp 0;
+#X text 490 30 On;
+#X text 490 84 Off;
+#X obj 127 269 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 127 314 dbtorms;
+#X msg 127 342 \$1 20;
+#X obj 127 288 clip 0 100;
+#X obj 127 367 line~;
+#X obj 106 401 *~;
+#X text 126 246 Gain :;
+#X obj 106 210 MonSynthe4, f 32;
+#X obj 106 171 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 190 171 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 274 171 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 359 171 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X text 380 213 Clique pour ouvrir le sous patch;
+#X text 97 120 4ème partiel, f 9;
+#X text 187 120 3ème partiel, f 9;
+#X text 277 120 2ème partiel, f 9;
+#X text 357 120 1er partiel, f 8;
+#X text 12 160 Fréquences;
+#X text 24 24 Dans cet exemple \, le patch est "empaqueté" dans des
+sous patchs qui sont dans le même dossier., f 36;
+#X connect 5 0 8 0;
+#X connect 6 0 7 0;
+#X connect 7 0 9 0;
+#X connect 8 0 6 0;
+#X connect 9 0 10 1;
+#X connect 10 0 0 0;
+#X connect 10 0 0 1;
+#X connect 12 0 10 0;
+#X connect 13 0 12 0;
+#X connect 14 0 12 1;
+#X connect 15 0 12 2;
+#X connect 16 0 12 3;

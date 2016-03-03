@@ -1,0 +1,63 @@
+#N canvas 117 24 1053 518 12;
+#X text 12 13 La stéréophonie \, ou stéréo \, est un ensemble de
+techniques d’enregistrement \, de synthèse et de restitution du
+son visant à créer de manière - plus ou moins - cohérente l’image
+spatiale de sons dans l’espace. La restitution est réalisée à
+l’aire de généralement deux transducteurs (tels que deux haut-parleurs
+front left et front right positionnés devant l’auditeur et respectivement
+à -45° et 45° selon son axe d’écoute ou des écouteurs) mais
+il peut y en avoir plus. La captation peut être réalisée avec deux
+microphones cardioïdes placé au lieu de l’auditeur est dirigés
+dans la direction des haut-parleurs front left et front right. Enfin
+la synthèse \, ou simulation \, utilise généralement deux canaux
+correspondant respectivement aux haut-parleurs de gauche et de droite
+dans lesquels le son original est modifié via une modification du
+gain et/ou l’application d’un temps de retard afin de simuler le
+placement du son entre ces deux haut-parleurs. Dans notre approche
+\, il y a néanmoins deux points importants à ne pas manquer :;
+#X text 12 323 • D’une part \, de nombreuses approches existent
+et celles qui viennent d’être cités sont simplifiés et ne recouvrent
+aucunement l’ensemble des pratiques.;
+#X text 12 383 • D’autre part \, la notion de cohérence ou de
+vraisemblance est à prendre avec précaution. Dans de nombreux cas
+\, comme celui du flanger \, l’enjeu est plutôt de créer un espace
+sonore musical via du mouvement plutôt que de tenter de simuler de
+manière réaliste le positionnement d’une source sonore.;
+#X obj 549 410 dac~ 1 2, f 14;
+#X obj 549 145 readsf~ 2, f 33;
+#X obj 549 40 tgl 15 0 empty \$0-rplay empty 17 7 0 10 -262144 -1 -1
+1 1;
+#X obj 549 68 t f b;
+#X text 568 37 Start/Stop;
+#X obj 590 220 nbx 5 14 0 100 0 0 empty \$0-gain empty 0 -8 0 10 -262144
+-1 -1 80 256;
+#X obj 590 269 dbtorms;
+#X msg 590 297 \$1 20;
+#X obj 590 243 clip 0 100;
+#X obj 590 322 line~;
+#X obj 549 363 *~;
+#X text 589 200 Gain :;
+#X text 645 217 dB;
+#X obj 658 363 *~;
+#X msg 586 119 open StereoExemple.wav;
+#X obj 738 213 loadbang;
+#X msg 738 238 80;
+#X obj 738 263 s \$0-gain;
+#X msg 742 321 \; pd dsp 1;
+#X msg 742 371 \; pd dsp 0;
+#X connect 4 0 13 0;
+#X connect 4 1 16 1;
+#X connect 5 0 6 0;
+#X connect 6 0 4 0;
+#X connect 6 1 17 0;
+#X connect 8 0 11 0;
+#X connect 9 0 10 0;
+#X connect 10 0 12 0;
+#X connect 11 0 9 0;
+#X connect 12 0 13 1;
+#X connect 12 0 16 0;
+#X connect 13 0 3 0;
+#X connect 16 0 3 1;
+#X connect 17 0 4 0;
+#X connect 18 0 19 0;
+#X connect 19 0 20 0;

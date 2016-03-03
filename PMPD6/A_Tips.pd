@@ -1,0 +1,41 @@
+#N canvas 66 23 942 825 10;
+#N canvas 0 22 594 386 calcul 0;
+#X obj 54 163 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X text 116 162 Durée en ms;
+#X obj 54 277 *, f 5;
+#X obj 91 208 samplerate~;
+#X obj 54 182 t f b;
+#X obj 91 252 / 1000;
+#X obj 54 302 nbx 10 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X text 156 300 Durée en échantillons;
+#X obj 91 233 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X text 155 232 Fréquence d'échantillonage;
+#X text 12 10 La fréquence d'échantillonage est le nombre d'échantillons
+par secondes (généralement 44100). Donc 1 seconde équivaut en échantillons
+à la fréquence d'échantillonage. Et comme 1 seconde équivaut à
+1000 millisecondes \, la durée d'1 milliseconde équivaut en échantillons
+à la fréquence d'échantillonage divisé par 1000 Ainsi \, une durée
+t en millisecondes est donc équivalente en échantillons à t * (fréquence
+d'échantillonage / 1000)., f 71;
+#X connect 0 0 4 0;
+#X connect 2 0 6 0;
+#X connect 3 0 8 0;
+#X connect 4 0 2 0;
+#X connect 4 1 3 0;
+#X connect 5 0 2 1;
+#X connect 8 0 5 0;
+#X restore 21 95 pd calcul temps en échantillons;
+#X text 18 51 Rappel pour le calcul des millisecondes vers un nombre
+d'échantillons :;
+#N canvas 436 46 450 300 header 0;
+#X obj 101 103 cnv 15 30 15 empty empty La 2 8 0 14 -262144 -66577
+0;
+#X obj 121 103 cnv 15 30 15 empty empty lecture 2 8 0 14 -262144 -66577
+0;
+#X obj 182 103 cnv 15 20 15 empty empty interpolée 2 8 0 14 -262144
+-66577 0;
+#X coords 0 -1 1 1 466 20 2 100 100;
+#X restore 12 9 pd header;

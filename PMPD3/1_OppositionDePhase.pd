@@ -1,0 +1,57 @@
+#N canvas 17 117 1026 706 12;
+#X msg 12 41 \; pd dsp 1;
+#X obj 503 40 nbx 5 14 0 10 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0 256;
+#X msg 12 91 \; pd dsp 0;
+#X obj 505 383 +~;
+#X obj 505 408 *~ 0.5;
+#X text 576 382 Addition des deux signaux;
+#X text 576 409 Normalisation du signal résultant;
+#X obj 505 627 GainMono~;
+#X obj 505 672 dac~;
+#X obj 382 152 Scope~;
+#X obj 642 152 Scope~;
+#X obj 515 442 Scope~;
+#X obj 506 14 hsl 128 18 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X msg 439 33 set \$1;
+#X obj 372 117 osc~ 100;
+#X obj 372 345 *~ 1;
+#X obj 632 345 *~ 1;
+#X obj 632 117 osc~ 100;
+#X obj 503 59 t b f;
+#X obj 503 84 f 0;
+#X text 11 12 L'opposition de phase :;
+#X text 565 37 Décalge de phase (0-1);
+#X text 14 147 Un oscillateur est défini par une fréquence en Hertz
+(Hz) qui défini le nombre de périodes de l’oscillateur par seconde.
+Changer la phase d’un oscillateur revient à déplacer le début
+et la fin des périodes. Un oscillateur sinusoïdal en opposition de
+phase est son exacte inverse \; ainsi lorsque le signal est à 1 \,
+en opposition de phase son signal est -1 Additionner un oscillateur
+sinusoïdal avec une version de lui même en opposition de phase revient
+donc à annuler le signal. Pour des décalages de phase intermédiaires
+\, le signal résultant de l’addition amène à une diminution ou
+augmentation de l’amplitude selon si les phases convergent ou divergent.
+Cette opération est un filtrage. Pour une fonction sinus ou cosinus
+\, la phase est comprise enter 0 et 2π. Dans Pure Data ou Max \, la
+phase d’un oscillateur est généralement comprise entre 0 et 1 \;
+elle est en quelque sorte divisée par 2π., f 41;
+#X connect 1 0 13 0;
+#X connect 1 0 18 0;
+#X connect 3 0 4 0;
+#X connect 4 0 7 0;
+#X connect 4 0 11 0;
+#X connect 7 0 8 0;
+#X connect 7 0 8 1;
+#X connect 12 0 1 0;
+#X connect 13 0 12 0;
+#X connect 14 0 9 0;
+#X connect 14 0 15 0;
+#X connect 15 0 3 0;
+#X connect 16 0 3 1;
+#X connect 17 0 16 0;
+#X connect 17 0 10 0;
+#X connect 18 0 19 0;
+#X connect 18 1 17 1;
+#X connect 19 0 14 1;

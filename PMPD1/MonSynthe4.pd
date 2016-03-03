@@ -1,0 +1,48 @@
+#N canvas 189 34 860 544 12;
+#X obj 92 310 +~;
+#X obj 92 375 +~;
+#X obj 357 212 *~ 0.7;
+#X obj 212 214 *~ 0.43;
+#X obj 92 263 +~;
+#X obj 92 214 *~ 0.3;
+#X obj 488 183 MonOsc1Hz;
+#X obj 487 79 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 357 179 MonOsc2Hz;
+#X obj 357 81 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 212 178 MonOsc3Hz;
+#X obj 212 81 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 92 177 MonOsc4Hz;
+#X obj 92 81 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 92 411 outlet~;
+#X obj 92 44 inlet;
+#X obj 212 45 inlet;
+#X obj 359 43 inlet;
+#X obj 487 44 inlet;
+#X text 160 410 Une sortie signal;
+#X text 80 10 1ère entrée control, f 11;
+#X text 200 10 2ème entrée control, f 11;
+#X text 350 10 3ème entrée control, f 11;
+#X text 470 10 4ème entrée control, f 11;
+#X text 580 180 <-encore des sous-patchs;
+#X connect 0 0 1 0;
+#X connect 1 0 14 0;
+#X connect 2 0 0 1;
+#X connect 3 0 4 1;
+#X connect 4 0 0 0;
+#X connect 5 0 4 0;
+#X connect 6 0 1 1;
+#X connect 7 0 6 0;
+#X connect 8 0 2 0;
+#X connect 9 0 8 0;
+#X connect 10 0 3 0;
+#X connect 11 0 10 0;
+#X connect 12 0 5 0;
+#X connect 13 0 12 0;
+#X connect 15 0 13 0;
+#X connect 16 0 11 0;
+#X connect 17 0 9 0;
+#X connect 18 0 7 0;

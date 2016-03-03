@@ -1,0 +1,104 @@
+#N canvas 107 23 1296 738 12;
+#X msg 12 41 \; pd dsp 1;
+#X obj 393 189 nbx 5 14 0 1e+37 0 0 empty \$0-deltime empty 0 -8 0
+10 -262144 -1 -1 5 256;
+#X msg 12 91 \; pd dsp 0;
+#X obj 372 278 *~ 0.5;
+#X obj 372 597 GainMono~;
+#X obj 372 642 dac~;
+#X obj 382 312 Scope~;
+#X obj 372 127 osc~ 100;
+#X text 11 12 Les relations temporelles :;
+#X obj 372 245 +~;
+#X obj 623 189 nbx 5 14 0 1e+37 0 0 empty \$0-deltime empty 0 -8 0
+10 -262144 -1 -1 5 256;
+#X obj 602 278 *~ 0.5;
+#X obj 612 312 Scope~;
+#X obj 602 245 +~;
+#X obj 843 189 nbx 5 14 0 1e+37 0 0 empty \$0-deltime empty 0 -8 0
+10 -262144 -1 -1 5 256;
+#X obj 822 278 *~ 0.5;
+#X obj 832 312 Scope~;
+#X obj 822 245 +~;
+#X obj 1073 189 nbx 5 14 0 1e+37 0 0 empty \$0-deltime empty 0 -8 0
+10 -262144 -1 -1 5 256;
+#X obj 1052 278 *~ 0.5;
+#X obj 1062 312 Scope~;
+#X obj 1052 245 +~;
+#X obj 393 163 delwrite~ \$0-del1 1000;
+#X obj 393 212 delread~ \$0-del1;
+#X obj 623 163 delwrite~ \$0-del2 1000;
+#X obj 623 212 delread~ \$0-del2;
+#X obj 843 163 delwrite~ \$0-del3 1000;
+#X obj 843 212 delread~ \$0-del3;
+#X obj 1073 163 delwrite~ \$0-del4 1000;
+#X obj 1073 212 delread~ \$0-del4;
+#X obj 632 50 nbx 5 14 0 1e+37 0 0 \$0-deltime empty empty 0 -8 0 10
+-262144 -1 -1 5 256;
+#X text 694 47 Temps de retard (ms);
+#X obj 635 24 hsl 128 18 0 5 0 0 \$0-deltime empty empty -2 -8 0 10
+-262144 -1 -1 12700 1;
+#X msg 568 43 set \$1;
+#X text 370 78 Période : 10ms;
+#X obj 602 127 osc~ 200;
+#X obj 822 127 osc~ 222;
+#X text 600 78 Période : 5ms;
+#X text 820 78 Période : 4.5ms;
+#X obj 1052 127 osc~ 300;
+#X text 1050 78 Période : 3.333ms;
+#X obj 602 497 *~ 1;
+#X obj 822 497 *~ 1;
+#X obj 1052 497 *~ 1;
+#X text 370 98 Demi-période : 5ms;
+#X text 600 98 Demi-période : 2.5ms;
+#X text 820 98 Demi-période : 2.25ms;
+#X text 1050 98 Demi-période : 1.667ms;
+#X text 14 147 Lors d’un filtrage par retard temporelle \, il existe
+donc une relation entre la période de l’oscillateur sinusoïdal
+et le temps de retard. Cette relation est de N fois la période pour
+faire augmenter l’amplitude de l’oscillateur et N fois la période
+plus la demi-période pour annuler totalement le signal \, créer une
+opposition des phases. Donc pour un temps de retard donné \, certains
+oscillateurs sinusoïdaux diminuent en amplitude et d’autres augmentent.
+Il est donc possible de définir les fréquences qui sont annulées
+pour un temps de retard et celles qui sont augmentées. Un temps t
+en ms correspond donc à un période \, est donc à une fréquence
+de 1000/t. Pour toutes les fréquences multiples de f = 1000/t l’amplitude
+est doublée mais toutes les fréquences multiples de f+1/2f sont diminuées.
+, f 41;
+#X connect 1 0 23 0;
+#X connect 3 0 4 0;
+#X connect 3 0 6 0;
+#X connect 4 0 5 0;
+#X connect 4 0 5 1;
+#X connect 7 0 9 0;
+#X connect 7 0 22 0;
+#X connect 9 0 3 0;
+#X connect 10 0 25 0;
+#X connect 11 0 12 0;
+#X connect 11 0 41 0;
+#X connect 13 0 11 0;
+#X connect 14 0 27 0;
+#X connect 15 0 16 0;
+#X connect 15 0 42 0;
+#X connect 17 0 15 0;
+#X connect 18 0 29 0;
+#X connect 19 0 20 0;
+#X connect 19 0 43 0;
+#X connect 21 0 19 0;
+#X connect 23 0 9 1;
+#X connect 25 0 13 1;
+#X connect 27 0 17 1;
+#X connect 29 0 21 1;
+#X connect 30 0 33 0;
+#X connect 32 0 30 0;
+#X connect 33 0 32 0;
+#X connect 35 0 13 0;
+#X connect 35 0 24 0;
+#X connect 36 0 17 0;
+#X connect 36 0 26 0;
+#X connect 39 0 21 0;
+#X connect 39 0 28 0;
+#X connect 41 0 4 0;
+#X connect 42 0 4 0;
+#X connect 43 0 4 0;

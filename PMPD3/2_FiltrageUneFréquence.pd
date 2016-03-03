@@ -1,0 +1,57 @@
+#N canvas -15 29 1026 706 12;
+#X msg 264 29 \; pd dsp 1;
+#X obj 632 50 nbx 5 14 0 1e+37 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 4.72441 256;
+#X msg 264 79 \; pd dsp 0;
+#X obj 505 353 +~;
+#X obj 632 73 delread~ \$0-del;
+#X obj 384 73 delwrite~ \$0-del 1000;
+#X obj 505 378 *~ 0.5;
+#X text 576 352 Addition des deux signaux;
+#X text 576 379 Normalisation du signal résultant;
+#X obj 505 597 GainMono~;
+#X obj 505 642 dac~;
+#X obj 382 102 Scope~;
+#X obj 642 102 Scope~;
+#X obj 515 412 Scope~;
+#X text 694 47 Temps de retard (ms);
+#X obj 635 24 hsl 128 18 0 10 0 0 \$0-deltime empty empty -2 -8 0 10
+-262144 -1 -1 6000 1;
+#X msg 568 43 set \$1;
+#X obj 372 37 osc~ 100;
+#X text 14 147 Les Hertz (Hz) sont des périodes par seconde (nombre
+de périodes/seconde) \, ainsi la période d’un oscillateur est définie
+en seconde par 1/fréquence ou en millisecondes par 1000/fréquence.
+Retarder un oscillateur revient à décaler sa phase. Lorsque le temps
+de retard équivaut à la moitié de la période de l’oscillateur
+celui-ci est en opposition de phase. Ainsi \, de manière similaire
+à l’exemple précédent \, il est possible de filtrer le signal
+généré par l’oscillateur mais en utilisant une ligne à retard.
+Dans le cas présent \, l’oscillateur sinusoïdal est à 100Hz \,
+sa période est donc de 10ms. Retarder le signal de 5ms revient donc
+à le mettre en opposition de phase et additionner ce signal avec le
+signal original revient à annuler le signal. Ici encore \, pour des
+valeurs intermédiaires l’addition amène à une diminution ou augmentation
+de l’amplitude selon si le temps de retard se rapproche ou s’éloigne
+d’un multiple de la période : N*10ms ou d’un multiple de la période
+plus un demi de la période : N*10ms+1/2*10ms \; cette période n’est
+bien sûr valable que pour 100Hz., f 43;
+#X obj 372 315 *~ 1;
+#X obj 632 315 *~ 1;
+#X text 11 12 Le filtrage d'une fréquence :;
+#X connect 1 0 4 0;
+#X connect 1 0 16 0;
+#X connect 3 0 6 0;
+#X connect 4 0 12 0;
+#X connect 4 0 20 0;
+#X connect 6 0 9 0;
+#X connect 6 0 13 0;
+#X connect 9 0 10 0;
+#X connect 9 0 10 1;
+#X connect 15 0 1 0;
+#X connect 16 0 15 0;
+#X connect 17 0 5 0;
+#X connect 17 0 11 0;
+#X connect 17 0 19 0;
+#X connect 19 0 3 0;
+#X connect 20 0 3 1;

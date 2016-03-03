@@ -1,0 +1,193 @@
+#N canvas 510 23 740 747 12;
+#X declare -lib Gem;
+#X msg 12 51 \; pd dsp 1;
+#X obj 478 269 nbx 5 14 0 1e+37 0 0 empty \$0-deltime empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X msg 12 101 \; pd dsp 0;
+#X obj 457 627 GainMono~;
+#X obj 457 688 dac~;
+#X obj 467 432 Scope~;
+#X obj 457 325 +~;
+#X obj 478 292 delread~ \$0-del1;
+#X obj 426 46 nbx 5 14 0 1e+37 0 0 \$0-deltime empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X text 488 43 Temps de retard (ms);
+#X obj 429 20 hsl 128 18 0 5 0 0 \$0-deltime empty empty -2 -8 0 10
+-262144 -1 -1 0 1;
+#X msg 362 39 set \$1;
+#X text 14 527 Il est possible de voir que pour toutes les fréquences
+multiples de f \, l’amplitude est doublée et entre ces fréquences
+multiples \, l’amplitude est nulle d’où l’idée du filtre en
+peigne \; où les dents du peigne représentent cette alternance. Cet
+exemple utilise un bruit blanc fin de mieux révéler cet effet.,
+f 40;
+#N canvas 701 72 675 754 sonogram~ 0;
+#X obj 49 8 inlet~;
+#X obj 49 91 *~;
+#X obj 80 91 *~;
+#X obj 49 58 rfft~;
+#X obj 49 173 clip~ 0 1;
+#X obj 49 149 /~ 511;
+#N canvas 300 485 450 300 hueToRgb 0;
+#X obj 138 53 inlet~;
+#X obj 103 131 -~ 0.666666;
+#X obj 103 182 clip~ 0 1;
+#X obj 103 156 *~ 3;
+#X obj 199 157 *~ 3;
+#X obj 199 208 wrap~;
+#X obj 199 183 clip~ 1e-05 1.00001;
+#X obj 199 132 -~ 0.333333;
+#X obj 377 139 *~ 3;
+#X obj 377 189 wrap~;
+#X obj 377 164 clip~ 1e-05 1.00001;
+#X obj 103 207 outlet~;
+#X obj 198 237 outlet~;
+#X obj 377 237 outlet~;
+#X connect 0 0 1 0;
+#X connect 0 0 7 0;
+#X connect 0 0 8 0;
+#X connect 1 0 3 0;
+#X connect 2 0 11 0;
+#X connect 3 0 2 0;
+#X connect 4 0 6 0;
+#X connect 5 0 12 0;
+#X connect 6 0 5 0;
+#X connect 7 0 4 0;
+#X connect 8 0 10 0;
+#X connect 9 0 13 0;
+#X connect 10 0 9 0;
+#X restore 49 207 pd hueToRgb;
+#X obj 49 119 *~ 1;
+#N canvas 664 328 564 367 gemrendering 0;
+#X obj 27 30 gemhead;
+#X obj 120 17 inlet~;
+#X obj 191 17 inlet~;
+#X obj 261 17 inlet~;
+#X obj 47 196 rotateXYZ 0 0 90;
+#X obj 47 257 translateXYZ 1.5 0 0;
+#X obj 27 136 pix_sig2pix~ 512 512;
+#X obj 27 295 square 3;
+#X obj 321 17 inlet~;
+#X obj 27 171 pix_texture;
+#X obj 47 226 scaleXYZ 2 1 1;
+#X obj 381 10 block~ 262144 128;
+#X connect 0 0 6 0;
+#X connect 1 0 6 0;
+#X connect 2 0 6 1;
+#X connect 3 0 6 2;
+#X connect 4 0 10 0;
+#X connect 5 0 7 0;
+#X connect 6 0 9 0;
+#X connect 8 0 6 3;
+#X connect 9 0 4 0;
+#X connect 10 0 5 0;
+#X restore 49 275 pd gemrendering;
+#X obj 49 33 *~ 1;
+#X obj 266 147 sel 1 0;
+#X obj 364 225 gemwin;
+#X msg 496 228 destroy;
+#X msg 367 184 create \, 1;
+#X obj 224 37 loadbang;
+#X obj 266 67 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 202 214 switch~ 512 4 1;
+#X obj 204 104 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 228 104 hsl 96 15 1 10 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 224 62 f 0;
+#X obj 370 68 declare -lib Gem;
+#X connect 0 0 9 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 3 0 1 0;
+#X connect 3 0 1 1;
+#X connect 3 1 2 0;
+#X connect 3 1 2 1;
+#X connect 4 0 6 0;
+#X connect 5 0 4 0;
+#X connect 6 0 8 0;
+#X connect 6 1 8 1;
+#X connect 6 2 8 2;
+#X connect 7 0 5 0;
+#X connect 9 0 3 0;
+#X connect 10 0 13 0;
+#X connect 10 1 12 0;
+#X connect 12 0 11 0;
+#X connect 13 0 11 0;
+#X connect 14 0 19 0;
+#X connect 15 0 19 0;
+#X connect 17 0 16 0;
+#X connect 17 0 10 0;
+#X connect 18 0 9 1;
+#X connect 19 0 17 0;
+#X coords 0 -1 1 1 130 24 2 200 100;
+#X restore 481 400 pd sonogram~;
+#X obj 468 223 delwrite~ \$0-del1 1000;
+#N canvas 0 22 1179 364 oscill 0;
+#X obj 38 78 osc~ 100;
+#X text 36 29 Période : 10ms;
+#X obj 198 78 osc~ 200;
+#X obj 368 78 osc~ 222;
+#X text 196 29 Période : 5ms;
+#X text 366 29 Période : 4.5ms;
+#X text 596 29 Période : 3.333ms;
+#X text 36 49 Demi-période : 5ms;
+#X text 196 49 Demi-période : 2.5ms;
+#X text 366 49 Demi-période : 2.25ms;
+#X text 596 49 Demi-période : 1.667ms;
+#X obj 598 78 osc~ 300;
+#X obj 313 175 outlet~;
+#X connect 0 0 12 0;
+#X connect 2 0 12 0;
+#X connect 3 0 12 0;
+#X connect 11 0 12 0;
+#X restore 388 111 pd oscill;
+#X obj 495 104 noise~;
+#X obj 457 358 *~ 0.5;
+#X obj 388 136 *~ 1;
+#X obj 495 136 *~ 0;
+#X obj 568 96 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 568 116 t b f;
+#X obj 568 141 f 1;
+#X obj 568 166 -;
+#X obj 388 161 /~ 4;
+#X text 14 157 Les exemples présentés se basent sur des oscillateurs
+sinusoïdaux. Cependant \, un signal peut être décomposé en une
+suite de fonctions périodiques en l’occurrence des fonctions sinus
+et cosinus \; ceci est à la base de la transformée de Fourier qui
+a donné la FFT (fast Fourier transform). En considérant un signal
+complexe comme une série d’oscillateurs sinusoïdaux \, additionner
+celui-ci avec une version retardée de lui-même revient à filtrer
+la série d’oscillateurs qui le compose (attention un filtrage n’est
+pas forcément diminuer l’amplitude) selon la relation définie précédemment.
+Ainsi pour un temps de retard t \, nous avons f = 1000/t et nous obtenons
+donc un tableau des filtrages :, f 40;
+#X text 14 477 f(Hz) | + : 1f | - : 1.5f | + : 2f | - : 2.5f | + :
+3f | ect., f 34;
+#X text 11 22 Le filtre en peigne (comb filter) :;
+#X connect 1 0 7 0;
+#X connect 3 0 4 0;
+#X connect 3 0 4 1;
+#X connect 6 0 17 0;
+#X connect 7 0 6 1;
+#X connect 8 0 11 0;
+#X connect 10 0 8 0;
+#X connect 11 0 10 0;
+#X connect 15 0 18 0;
+#X connect 16 0 19 0;
+#X connect 17 0 3 0;
+#X connect 17 0 5 0;
+#X connect 17 0 13 0;
+#X connect 18 0 24 0;
+#X connect 19 0 14 0;
+#X connect 19 0 6 0;
+#X connect 20 0 19 1;
+#X connect 20 0 21 0;
+#X connect 21 0 22 0;
+#X connect 21 1 23 1;
+#X connect 22 0 23 0;
+#X connect 23 0 18 1;
+#X connect 24 0 6 0;
+#X connect 24 0 14 0;

@@ -1,0 +1,110 @@
+#N canvas 154 23 1382 701 12;
+#X obj 66 152 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 36 256;
+#X obj 743 65 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 743 284 + 1, f 25;
+#X obj 743 317 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X text 803 308 Boite nombre \, elle affiche le résultat de l'addition.
+, f 27;
+#X obj 772 125 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X text 835 103 Boite nombre \, elle définit le deuxième terme de
+l'addition., f 30;
+#X text 803 59 Boite nombre \, elle définit le premier terme de l'addition.
+, f 34;
+#X obj 66 191 trigger float float float, f 30;
+#X obj 66 262 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 36 256;
+#X obj 184 262 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 36 256;
+#X obj 303 262 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 36 256;
+#X text 323 141 L'objet trigger envoie un message vers plusieurs outlets.
+Il y a 3 arguments "float" pour dire à l'objet que nous voulons trois
+sorties "float"., f 36;
+#X text 73 229 Outlet 1;
+#X text 193 229 Outlet 2;
+#X text 314 229 Outlet 3;
+#X obj 303 281 print outlet 3;
+#X obj 184 281 print outlet 2;
+#X obj 66 281 print outlet 1;
+#X text 61 326 Les messages sont toujours envoyés en commençant par
+les outlets de droite vers les outlets de gauche. Ici l'outlet 3 evoie
+la valeur \, puis l'outlet 2 et enfin l'outlet 1;
+#X obj 66 492 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 223 592 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X text 73 569 Outlet 1;
+#X text 232 569 Outlet 2;
+#X obj 223 611 print outlet 2;
+#X obj 66 611 print outlet 1;
+#X obj 66 586 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 66 531 trigger bang float, f 20;
+#X obj 760 165 trigger bang float, f 25;
+#X text 61 306 <-----------------------------|;
+#X text 22 16 1 - Nous avons vu que les objets possèdent des inlets
+chauds et froids mais nous voulons dans certains cas changer le deuxième
+terme d'une opération et que l'objet réalise automatiquement le calcul.
+Pour cela nous utilisons l'objet "trigger" qui agit comme un multi-détonateur
+!, f 57;
+#X text 22 436 2 - Il est possible de transformer un message entrant
+vers un autre type de message comme un bang en changeant les arguments.
+;
+#X text 705 8 3 - Nous pouvons maintenant utiliser le trigger pour
+automatiser le calcul :, f 44;
+#X text 965 193 Outlet 2 - Le nombre est envoyé pour définir le deuxième
+terme., f 23;
+#X text 766 194 Outlet 1 - Puis un "bang" est envoyé pour dire à
+l'objet de faire le calcul., f 22;
+#X obj 710 505 trigger bang float bang, f 25;
+#X text 923 506 =;
+#X obj 949 505 t b f b, f 25;
+#X obj 886 462 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 710 554 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 907 554 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 949 554 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 1146 554 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 808 556 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 1047 556 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 -262144 -1 -1 0 256;
+#X text 283 481 Il y a 2 arguments "bang" et "float" pour dire à l'objet
+que nous voulons sortir un "float" par le deuxième outlet et un message
+"bang" par le premier outlet., f 36;
+#X text 705 398 4 - Tips : Le "trigger" peut être remplacé par "t"
+\, l'argument "float" peut être remplacé par "f" \, l'argument "bang"
+peut être remplacé par "b":;
+#X connect 0 0 8 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 5 0 28 0;
+#X connect 8 0 9 0;
+#X connect 8 1 10 0;
+#X connect 8 2 11 0;
+#X connect 9 0 18 0;
+#X connect 10 0 17 0;
+#X connect 11 0 16 0;
+#X connect 20 0 27 0;
+#X connect 21 0 24 0;
+#X connect 26 0 25 0;
+#X connect 27 0 26 0;
+#X connect 27 1 21 0;
+#X connect 28 0 2 0;
+#X connect 28 1 2 1;
+#X connect 35 0 39 0;
+#X connect 35 1 43 0;
+#X connect 35 2 40 0;
+#X connect 37 0 41 0;
+#X connect 37 1 44 0;
+#X connect 37 2 42 0;
+#X connect 38 0 35 0;
+#X connect 38 0 37 0;

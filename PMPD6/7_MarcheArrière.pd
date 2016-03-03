@@ -1,0 +1,108 @@
+#N canvas 122 23 496 791 10;
+#N canvas 436 46 450 300 header 0;
+#X obj 101 103 cnv 15 30 15 empty empty La 2 8 0 14 -262144 -66577
+0;
+#X obj 122 103 cnv 15 30 15 empty empty lecture 2 8 0 14 -262144 -66577
+0;
+#X obj 182 103 cnv 15 20 15 empty empty inversé 2 8 0 14 -262144 -66577
+0;
+#X coords 0 -1 1 1 466 20 2 100 100;
+#X restore 12 9 pd header;
+#X obj 225 434 pad.output~;
+#N canvas 506 147 450 300 sampler 0;
+#X obj 68 156 outlet~;
+#X obj 118 237 soundfiler;
+#X obj 119 179 symbol \$0-demo;
+#X obj 68 113 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X text 86 110 Play;
+#X obj 68 134 tabplay~ \$0-demo, f 21;
+#X obj 68 59 loadbang;
+#X obj 68 81 t b b;
+#X obj 131 33 array define \$0-demo;
+#X obj 131 80 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 118 207 read -resize Sound3.wav \$1;
+#X connect 2 0 10 0;
+#X connect 3 0 5 0;
+#X connect 5 0 0 0;
+#X connect 5 1 3 0;
+#X connect 6 0 7 0;
+#X connect 7 0 3 0;
+#X connect 7 1 2 0;
+#X connect 9 0 7 0;
+#X connect 10 0 1 0;
+#X restore 38 396 pd sampler;
+#X text 44 420 Tête d'enregistrement;
+#X obj 38 443 delwrite~ \$0-delay 20100;
+#X text 15 33 La transposition du son se fait en augmentant ou en diminuant
+de temps de retard de la tête de lecture. Lorsque le temps de retard
+augmente \, le buffer est lu plus lentement résultant en un son transposé
+vers le bas. Par exemple si à chaque échantillon enregistré par
+la tête d'écriture le temps de retard augmente d'un demi échantillon
+\, le son perçu est une octave en dessous du son original. Une incrémentation
+du temps de retard de trois quart d'échantillon implique une transposition
+de deux octave plus bas. En continuant cette approche plus la valeur
+d'incrémentation se rapproche d’un échantillon \, plus le son est
+transposé vers le bas., f 76;
+#X text 15 262 Mais si la valeur d'incrémentation du temps de retard
+dépasse un alors le buffer est lu à l'envers. En effet \, si à chaque
+échantillon enregistré par la tête d'écriture le temps de retard
+augmente de deux échantillons alors la tête de lecture avance avec
+la tête de lecture d'un échantillon mais recule aussi de deux échantillons
+\, en soit \, elle recule d'un échantillon et le buffer et lus à
+l'envers., f 76;
+#X text 15 484 La mise en œuvre du module de lecture inversé se fait
+de manière similaire au module de lecture transpositeur en utilisant
+deux têtes de lecture afin de pouvoir revenir à un temps de retard
+nul sans créer de clicks quand la tête de lecture arrive à la tête
+d'écriture. Cependant une approche sensiblement différente de la
+taille de l'enveloppe est nécessaire. Alors que la transposition implique
+une taille d'enveloppe généralement assez petite pour pour ne pas
+avoir un effet de superposition de deux voix à des temps de retard
+différents (mais pas trop pour éviter un effet de modulation d'amplitude)
+\, la lecture inversée nécessite une taille d'enveloppe suffisamment
+grande pour pouvoir entendre le son comme étant lu à l'envers. En
+effet \, un grain sonore de quelques millisecondes est trop court pour
+pouvoir distinguer un sens de lecture. Cela implique qu'en ayant deux
+têtes de lecture ayant chacune une enveloppe d'amplitude de l'ordre
+de la seconde (ou plus) \, l'approche génère deux voix avec un décalage
+temporel. Ceci peut s'avérer non-souhaité mais dans une approche
+temps réel de la musique c'est inévitable. Le temps avance et nous
+tentons de le lire à l'envers \, il faut donc en continue courir après.
+, f 76;
+#X text 15 710 Enfin \, un point important est que la taille du buffer
+doit toujours être au minimum deux fois supérieur à la taille de
+l'enveloppe. Lorsque la tête d'écriture avance d'un échantillon
+\, la tête de lecture recule d'un échantillon dans le buffer. Il
+faut donc la moitié du temps du buffer pour que les deux têtes se
+rencontrent., f 76;
+#X obj 225 409 delback~ \$0-delay;
+#X obj 225 344 nbx 5 14 -1e+37 1e+37 0 0 empty \$0-wsi empty 0 -8 0
+10 -262144 -1 -1 10000 256;
+#X msg 225 363 \$1 100;
+#X text 281 353 Taille de l'enveloppe;
+#X obj 225 385 line~;
+#X text 261 387 Tête de lecture inversée;
+#X text 336 403 Argument 1 : nom de la ligne à retard, f 22;
+#N canvas 0 22 450 300 init 0;
+#X obj 124 149 s \$0-wsi;
+#X msg 124 121 10000;
+#X obj 124 97 loadbang;
+#X connect 1 0 0 0;
+#X connect 2 0 1 0;
+#X restore 37 358 pd init;
+#X text 15 156 A ce point arrive la valeur critique \, si à chaque
+échantillon enregistré par la tête d'écriture le temps de retard
+augmente d'un échantillon \, la tête de lecture reste bloquée sur
+un même échantillon résultant en un signal unitaire correspondant
+à une fréquence de zéro hertz. En effet \, à chaque échantillon
+enregistré par la tête d'écriture \, celle-ci avance d'un échantillon
+et la tête de lecture qui la suit avance de même mais si le retard
+augmente en même temps d'un échantillon alors la tête de lecture
+reste à la même place dans le buffer., f 76;
+#X connect 2 0 4 0;
+#X connect 9 0 1 0;
+#X connect 10 0 11 0;
+#X connect 11 0 13 0;
+#X connect 13 0 9 0;

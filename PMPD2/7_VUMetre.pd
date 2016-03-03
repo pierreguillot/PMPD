@@ -1,0 +1,21 @@
+#N canvas 331 36 365 427 12;
+#X msg 154 35 \; pd dsp 1;
+#X obj 48 194 vu 15 120 empty empty -1 -8 0 10 -66577 -1 1 0;
+#X obj 47 137 env~;
+#X obj 47 87 GainMono~;
+#X obj 47 51 noise~;
+#X msg 154 85 \; pd dsp 0;
+#X obj 47 351 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 99.91 256;
+#X obj 47 162 - 95;
+#X obj 47 325 + 100;
+#X text 88 138 Signal -> amplitude;
+#X text 88 163 mapping ampltiude;
+#X text 98 329 mappling amplitude;
+#X text 10 15 Le VU-Metre;
+#X connect 1 0 8 0;
+#X connect 2 0 7 0;
+#X connect 3 0 2 0;
+#X connect 4 0 3 0;
+#X connect 7 0 1 0;
+#X connect 8 0 6 0;

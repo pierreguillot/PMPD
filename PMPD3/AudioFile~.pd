@@ -1,0 +1,85 @@
+#N canvas 110 35 585 552 12;
+#X obj 19 145 readsf~ 2, f 21;
+#X obj 184 170 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 19 40 tgl 15 0 empty \$0-rplay empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj 19 68 t f b;
+#X obj 184 213 s \$0-start;
+#X obj 19 8 r \$0-start;
+#X obj 184 189 f 0;
+#X obj 205 146 tgl 15 0 empty \$0-loop empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X msg 36 119 open /Users/Pierre/Desktop/PPDM/PMPD2/Son1.wav;
+#X text 224 145 Loop;
+#X text 38 37 Start/Stop;
+#X obj 34 220 nbx 5 14 0 100 0 0 empty \$0-gain empty 0 -8 0 10 -262144
+-1 -1 0 256;
+#X obj 34 269 dbtorms;
+#X msg 34 297 \$1 20;
+#X obj 34 243 clip 0 100;
+#X obj 34 322 line~;
+#X obj 23 363 *~;
+#X text 33 200 Gain :;
+#X obj 23 388 outlet~;
+#X text 90 217 dB;
+#X obj 133 363 *~;
+#X obj 133 388 outlet~;
+#X obj 152 46 openpanel;
+#X obj 152 96 list trim;
+#X obj 152 71 list prepend set open;
+#X obj 152 23 bng 15 250 50 0 empty \$0-open empty 17 7 0 10 -262144
+-1 -1;
+#X obj 307 325 bng 15 250 50 0 \$0-open empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 307 444 nbx 5 14 0 100 0 0 \$0-gain empty empty 0 -8 0 10 -262144
+-1 -1 0 256;
+#X text 363 441 dB;
+#X obj 307 365 tgl 15 0 \$0-rplay empty empty 17 7 0 10 -262144 -1
+-1 0 1;
+#X text 304 303 Open;
+#X text 306 424 Gain;
+#X text 305 343 Play/Pause;
+#X obj 307 405 tgl 15 0 \$0-loop empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X text 305 383 Loop;
+#X obj 400 343 vu 15 120 \$0-gl empty -1 -8 0 10 -66577 -1 1 0;
+#X obj 450 343 vu 15 120 \$0-gr empty -1 -8 0 10 -66577 -1 1 0;
+#X obj 212 261 r \$0-start;
+#X obj 9 418 env~;
+#X obj 9 443 - 95;
+#X obj 109 418 env~;
+#X obj 109 443 - 95;
+#X obj 9 468 s \$0-gl;
+#X obj 109 468 s \$0-gr;
+#X connect 0 0 16 0;
+#X connect 0 1 20 1;
+#X connect 0 2 1 0;
+#X connect 1 0 6 0;
+#X connect 2 0 3 0;
+#X connect 3 0 0 0;
+#X connect 3 1 8 0;
+#X connect 5 0 2 0;
+#X connect 6 0 4 0;
+#X connect 7 0 6 1;
+#X connect 8 0 0 0;
+#X connect 11 0 14 0;
+#X connect 12 0 13 0;
+#X connect 13 0 15 0;
+#X connect 14 0 12 0;
+#X connect 15 0 16 1;
+#X connect 15 0 20 0;
+#X connect 16 0 18 0;
+#X connect 16 0 38 0;
+#X connect 20 0 21 0;
+#X connect 20 0 40 0;
+#X connect 22 0 24 0;
+#X connect 23 0 8 0;
+#X connect 24 0 23 0;
+#X connect 25 0 22 0;
+#X connect 37 0 29 0;
+#X connect 38 0 39 0;
+#X connect 39 0 42 0;
+#X connect 40 0 41 0;
+#X connect 41 0 43 0;
+#X coords 0 -1 1 1 200 170 2 300 300;

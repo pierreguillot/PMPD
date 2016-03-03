@@ -1,0 +1,38 @@
+#N canvas 331 36 849 372 12;
+#X obj 34 323 dac~ 1 2;
+#X msg 259 7 \; pd dsp 1;
+#X msg 260 62 \; pd dsp 0;
+#X obj 355 158 soundfiler;
+#X obj 353 29 array define soundfileL;
+#X obj 353 59 array define soundfileR;
+#X obj 18 208 tabplay~ soundfileL, f 21;
+#X msg 92 127 stop;
+#X obj 149 127 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 373 257 spigot 0;
+#X obj 373 282 s \$0-loop;
+#X obj 434 227 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 149 101 r \$0-loop;
+#X obj 208 208 tabplay~ soundfileR, f 21;
+#X obj 32 268 GainStereo~;
+#X msg 355 128 read -resize Son2.wav soundfileL soundfileR;
+#X text 10 15 Lecture d'un fichier son;
+#X text 455 226 Loop;
+#X text 167 124 Play;
+#X obj 355 96 loadbang;
+#X text 439 105 Load the sound file;
+#X connect 6 0 14 0;
+#X connect 7 0 6 0;
+#X connect 7 0 13 0;
+#X connect 8 0 6 0;
+#X connect 8 0 13 0;
+#X connect 9 0 10 0;
+#X connect 11 0 9 1;
+#X connect 12 0 8 0;
+#X connect 13 0 14 1;
+#X connect 13 1 9 0;
+#X connect 14 0 0 0;
+#X connect 14 1 0 1;
+#X connect 15 0 3 0;
+#X connect 19 0 15 0;

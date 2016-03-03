@@ -1,0 +1,73 @@
+#N canvas 328 58 1094 627 12;
+#X obj 38 571 dac~ 1 2;
+#X msg 142 502 \; pd dsp 1;
+#X msg 143 557 \; pd dsp 0;
+#X text 215 511 On;
+#X text 215 565 Off;
+#X obj 38 111 osc~ 220, f 9;
+#X obj 152 113 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 152 208 dbtorms;
+#X text 220 201 Transforme les dB en amplitude. Dans Max il faut utiliser
+dbtoa.;
+#X obj 152 257 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X text 210 253 Valeur en amplitude.;
+#X msg 152 306 \$1 20;
+#X msg 760 283 20;
+#X msg 760 308 \$1 100 zaza;
+#X obj 760 333 print;
+#X text 757 225 Ici \$1 est remplacé par 20, f 13;
+#X obj 881 333 print;
+#X msg 881 308 \$1 \$2 popo 31;
+#X msg 881 283 36 42;
+#X text 878 225 Ici \$1 est remplacé par 36 et \$2 par 42, f 16;
+#X obj 761 454 print;
+#X msg 761 429 papa zozo \$1 31;
+#X obj 761 407 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X text 758 376 Autre exemples :;
+#X obj 901 453 print;
+#X msg 901 403 36 42 fefe;
+#X msg 901 428 \$3 \$2 \$1;
+#X text 753 194 Les $ dans les messages :;
+#X obj 152 152 clip 0 100;
+#X obj 152 371 line~;
+#X text 204 361 L'objet line~ qui transforme le control en un signal
+audio lissé.;
+#X obj 38 426 *~;
+#X obj 152 182 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X text 214 286 L'objet line~ doit recevoir la valeur vers laquelle
+il doit aller et un temps en millisecondes pour atteindre cette valeur.
+Ici \$1 est la valeur que le message reçoit dans son inlet et 20 est
+le temps en millisecondes (ms). ---------->;
+#X text 92 416 Dans Pure Data \, les objets mathématiques signal ne
+doivent pas avoir d'arguments pour pouvoir prendre du signal dans le
+deuxième inlet.;
+#X text 24 14 Quand on change l'amplitude d'un signal avec du control
+\, il y a des clicks. Pour éviter ces artefacts \, il est nécessaire
+de transformer le control en signal en lissant les valeurs avec l'objet
+line~.;
+#X text 210 110 Valeur en decibel (dB) entre 0 et 100 Dans Max les
+decibels sont entre -100 et 0;
+#X text 240 150 La valeur est "clippée" pour ne pas être en dessous
+de 0 et au dessus de 100, f 56;
+#X connect 5 0 31 0;
+#X connect 6 0 28 0;
+#X connect 7 0 9 0;
+#X connect 9 0 11 0;
+#X connect 11 0 29 0;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 17 0 16 0;
+#X connect 18 0 17 0;
+#X connect 21 0 20 0;
+#X connect 22 0 21 0;
+#X connect 25 0 26 0;
+#X connect 26 0 24 0;
+#X connect 28 0 32 0;
+#X connect 29 0 31 1;
+#X connect 31 0 0 0;
+#X connect 31 0 0 1;
+#X connect 32 0 7 0;

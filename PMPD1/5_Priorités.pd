@@ -1,0 +1,60 @@
+#N canvas 7 53 669 733 12;
+#X text 22 16 Les opérations dans Pure Data se font dans l'ordre de
+création des connections :;
+#X obj 67 77 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 67 107 print 1;
+#X obj 137 107 print 2;
+#X obj 274 74 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 274 104 print 1;
+#X obj 345 104 print 2;
+#X text 63 132 |------>;
+#X text 274 132 <--------|;
+#X obj 67 247 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 67 307 print 1;
+#X obj 137 307 print 2;
+#X obj 274 244 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 274 304 print 1;
+#X obj 345 304 print 2;
+#X text 63 332 |------>;
+#X text 274 332 <--------|;
+#X obj 67 267 t b b;
+#X obj 274 267 t b b;
+#X text 22 166 A la réouverture d'un patch il n'est pas possible de
+savoir dans quel ordre a été créée une connexion \, c'est pourquoi
+il faut toujours !!!!!! utiliser des triggers.;
+#X obj 137 447 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 137 507 print 2;
+#X obj 205 507 print 1;
+#X text 63 532 <-----------------|;
+#X obj 67 507 print 3;
+#X obj 337 447 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 337 534 print 2;
+#X obj 337 562 print 1;
+#X obj 337 507 print 3;
+#X text 412 506 ^|||-, f 1;
+#X text 22 376 Dans Max \, les opérations se font de droite à gauche
+et du bas vers le haut :;
+#X text 22 605 Mais comme c'est pas non plus toujours très clair \,
+il faut mieux utiliser aussi des triggers !!!;
+#X connect 1 0 2 0;
+#X connect 1 0 3 0;
+#X connect 4 0 6 0;
+#X connect 4 0 5 0;
+#X connect 9 0 17 0;
+#X connect 12 0 18 0;
+#X connect 17 0 11 0;
+#X connect 17 1 10 0;
+#X connect 18 0 13 0;
+#X connect 18 1 14 0;
+#X connect 20 0 22 0;
+#X connect 20 0 21 0;
+#X connect 20 0 24 0;
+#X connect 25 0 27 0;
+#X connect 25 0 26 0;
+#X connect 25 0 28 0;

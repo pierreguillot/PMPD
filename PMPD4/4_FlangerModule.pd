@@ -1,0 +1,81 @@
+#N canvas 120 23 721 804 12;
+#X msg 267 209 \; pd dsp 1;
+#X msg 267 249 \; pd dsp 0;
+#X obj 36 501 dac~ 1 2, f 49;
+#X obj 36 452 Flanger~, f 49;
+#X obj 36 205 AudioFile~;
+#X obj 265 346 nbx 5 14 -1e+37 1e+37 0 0 empty \$0-rate empty 0 -8
+0 10 -262144 -1 -1 0.6 256;
+#X obj 346 346 nbx 5 14 0 1e+37 0 0 empty \$0-depth empty 0 -8 0 10
+-262144 -1 -1 36 256;
+#X obj 446 346 nbx 5 14 0 1e+37 0 0 empty \$0-shift empty 0 -8 0 10
+-262144 -1 -1 600 256;
+#X obj 536 345 nbx 5 14 0 1 0 0 empty \$0-spread empty 0 -8 0 10 -262144
+-1 -1 1 256;
+#X obj 536 406 nbx 5 14 0 1 0 0 empty \$0-feedback empty 0 -8 0 10
+-262144 -1 -1 1 256;
+#X text 264 322 Rate (Hz);
+#X text 347 322 Depth (ms);
+#X text 443 322 Shift (ms);
+#X text 533 323 Spread (0-1);
+#X text 535 384 Feedback (0-1);
+#X msg 265 365 rate \$1;
+#X msg 346 365 depth \$1;
+#X msg 536 364 spread \$1;
+#X msg 536 425 feedback \$1;
+#X obj 441 657 s \$0-spread;
+#X obj 379 705 s \$0-depth;
+#X obj 410 680 s \$0-shift;
+#X obj 473 632 s \$0-feedback;
+#X obj 348 573 r \$0-params;
+#X msg 446 365 shift \$1;
+#X obj 348 730 s \$0-rate;
+#X obj 463 548 loadbang;
+#X msg 464 572 1 5 0.001 1 1;
+#X obj 348 602 unpack f f f f f;
+#X text 40 536 Presets;
+#X obj 41 731 s \$0-params;
+#X msg 41 566 0.6 120 1 1 1;
+#X msg 81 628 0.6 30 3301 0 1;
+#X msg 61 597 0.6 5 600 1 1;
+#X text 12 13 Le module de flanging créé et comprenant bien comment
+chaque paramètre influence sur la nature du son \, il est désormais
+possible de rentrer dans la phase de jeu et de tests. Cette phase permet
+de définir les valeurs des paramètres qui se prêtent bien au son
+\, cette phase peut aussi être l’occasion de redéfinir les choix
+réalisés précédemment afin de faciliter le contrôle de module
+d’effet.;
+#X text 12 143 Dans le cas présent \, les différentes valeurs des
+paramètres sont enregistrées sous forme de listes pour être rappelées
+plus tard tels des presets.;
+#X msg 109 682 0.24 39 200 1 1;
+#X text 174 655 Sound6;
+#X msg 109 701 0.66 114 99 1 1;
+#X text 178 590 Sound5;
+#X connect 3 0 2 0;
+#X connect 3 1 2 1;
+#X connect 4 0 3 0;
+#X connect 4 1 3 1;
+#X connect 5 0 15 0;
+#X connect 6 0 16 0;
+#X connect 7 0 24 0;
+#X connect 8 0 17 0;
+#X connect 9 0 18 0;
+#X connect 15 0 3 2;
+#X connect 16 0 3 2;
+#X connect 17 0 3 2;
+#X connect 18 0 3 2;
+#X connect 23 0 28 0;
+#X connect 24 0 3 2;
+#X connect 26 0 27 0;
+#X connect 27 0 28 0;
+#X connect 28 0 25 0;
+#X connect 28 1 20 0;
+#X connect 28 2 21 0;
+#X connect 28 3 19 0;
+#X connect 28 4 22 0;
+#X connect 31 0 30 0;
+#X connect 32 0 30 0;
+#X connect 33 0 30 0;
+#X connect 36 0 30 0;
+#X connect 38 0 30 0;

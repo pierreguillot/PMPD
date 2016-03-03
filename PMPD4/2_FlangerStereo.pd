@@ -1,0 +1,357 @@
+#N canvas 46 23 1280 815 12;
+#X declare -lib Gem;
+#X obj 594 277 +~ 1;
+#X obj 594 304 *~ 0.5;
+#N canvas 0 22 450 300 rep 0;
+#X obj 119 16 inlet~;
+#X obj 164 96 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 164 45 loadbang;
+#X obj 164 70 f 1;
+#X obj 119 149 tabwrite~ \$0-LFO1;
+#X obj 164 119 metro 100;
+#X obj 236 15 block~ 4096 1 0.125;
+#X connect 0 0 4 0;
+#X connect 1 0 5 0;
+#X connect 2 0 3 0;
+#X connect 3 0 1 0;
+#X connect 5 0 4 0;
+#X restore 614 334 pd rep;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array \$0-LFO1 4096 float 0;
+#X coords 0 1 4095 0 150 98 2 0 0;
+#X restore 608 463 graph;
+#X text 775 609 Feedback (0-1);
+#X text 821 132 Rate (Hz);
+#X obj 565 697 +~, f 4;
+#X obj 319 642 loadbang;
+#X obj 318 692 s \$0-rate;
+#X obj 279 717 s \$0-depth;
+#X obj 241 744 s \$0-shift;
+#X msg 200 740 1;
+#X obj 200 770 s \$0-feedback;
+#X obj 603 422 Number~;
+#X msg 59 662 \; pd dsp 1;
+#X msg 59 702 \; pd dsp 0;
+#X msg 241 714 0.0001;
+#X msg 279 692 1;
+#N canvas 0 22 450 300 rep 0;
+#X obj 119 16 inlet~;
+#X obj 164 96 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 164 45 loadbang;
+#X obj 164 70 f 1;
+#X obj 164 119 metro 100;
+#X obj 236 15 block~ 4096 1 0.125;
+#X obj 119 149 tabwrite~ \$0-LFO2;
+#X connect 0 0 6 0;
+#X connect 1 0 4 0;
+#X connect 2 0 3 0;
+#X connect 3 0 1 0;
+#X connect 4 0 6 0;
+#X restore 974 334 pd rep;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array \$0-LFO2 4096 float 0;
+#X coords 0 1 4095 0 150 98 2 0 0;
+#X restore 798 463 graph;
+#X obj 883 422 Number~;
+#X obj 954 697 +~, f 4;
+#X obj 565 776 dac~ 1 2, f 49;
+#X obj 954 277 +~ 1;
+#X obj 954 304 *~ 0.5;
+#X obj 778 633 nbx 5 14 0 1 0 0 empty \$0-feedback empty 0 -8 0 10
+-262144 -1 -1 1 256;
+#X text 12 13 L’idée derrière le flanger stéréo est de générer
+un espace sonore où l’effet de filtrage semble balancer entre l’image
+spatiale de gauche et l’image spatiale de droite. Cette effet de
+l’espace et du son peut être créer via deux canaux ou plus et pour
+deux haut-parleurs ou plus. De même le son d’origine peut être
+monophonique ou avoir déjà subit un traitement stéréophonique se
+trouvant alors se deux canaux ou plus. L’exemple présenté offre
+en sortie deux canaux et prends-en entré deux canaux (auxquels il
+est possible d’assigner le même signal si le son de base est monophonique).
+;
+#X text 12 203 L’effet de basculement est créé en jouant sur les
+fréquences filtrées. Un flanger monophonique balaye temporellement
+les fréquences selon la fréquence f du LFO contrôlant le temps de
+retard. En ne considérant que la première bande de fréquences qui
+sont amoindries par le filtrage \, il est possible de définir que
+à un instant t les fréquences aiguës sont touchées et à un instant
+t+p/2 \, où p est la période de f \, les fréquences graves sont
+touchées. L’effet de basculement est créé lorsque à un instant
+t lorsque sur un canal les fréquences aiguës sont amoindries et que
+sur l’autre canal les fréquences graves sont amoindries. Et de manière
+réciproque à un instant t+p/2 \, cette relation est inversée. Il
+est aussi possible de déduire à partir de cela que à t+p/4 ou t+3p/4
+\, les filtrages sont identiques., f 59;
+#X text 12 463 Les fréquences filtrées dépendent du temps de retard
+\, un petit temps de retard « touche » les fréquences aiguës et
+un grand temps de retard « touche » les fréquences graves \, comme
+présentée précédemment où l’effet du filtrage subit par chaque
+fréquence dépend de la relation entre le temps de retard et la période
+de chaque fréquence. Pour mettre en œuvre cette relation \, il faut
+que lorsque sur un canal le retard est petit \, sur l’autre canal
+le retard est grand et donc inverser la phase du LFO contrôlant le
+temps de retard d’un des canaux par rapport à l’autre (cf PMPD3-1).
+, f 59;
+#X text 821 292 Depth (ms);
+#X text 823 332 Shift (ms);
+#X obj 762 296 nbx 5 14 0 1e+37 0 0 empty \$0-depth empty 0 -8 0 10
+-262144 -1 -1 1 256;
+#X obj 763 336 nbx 6 14 0 1e+37 0 0 empty \$0-shift empty 0 -8 0 10
+-262144 -1 -1 0.0001 256;
+#X obj 954 393 +~ 0.001, f 11;
+#X obj 594 393 +~ 0.001, f 11;
+#X obj 594 363 *~ 1, f 9;
+#X obj 954 363 *~ 1, f 9;
+#X obj 594 665 *~ 1;
+#X obj 954 665 *~ 1;
+#X obj 594 220 osc~ 1;
+#X obj 954 250 osc~ 1;
+#X obj 760 133 nbx 5 14 -1e+37 1e+37 0 0 empty \$0-rate empty 0 -8
+0 10 -262144 -1 -1 0.3 256;
+#X obj 594 167 t f b, f 6;
+#X obj 639 195 f 0;
+#X obj 561 129 *~ 1;
+#X obj 983 129 *~ 1;
+#X obj 954 197 t f b, f 6;
+#X obj 999 225 f 0.5;
+#X obj 752 56 GainMono~;
+#X obj 752 18 noise~;
+#X text 668 420 t1 (ms);
+#X text 818 420 t2 (ms);
+#X msg 319 667 0.3;
+#N canvas 701 72 675 754 sonogram~ 0;
+#X obj 9 8 inlet~;
+#X obj 9 91 *~;
+#X obj 40 91 *~;
+#X obj 9 58 rfft~;
+#X obj 9 173 clip~ 0 1;
+#X obj 9 149 /~ 511;
+#N canvas 300 485 450 300 hueToRgb 0;
+#X obj 138 53 inlet~;
+#X obj 103 131 -~ 0.666666;
+#X obj 103 182 clip~ 0 1;
+#X obj 103 156 *~ 3;
+#X obj 199 157 *~ 3;
+#X obj 199 208 wrap~;
+#X obj 199 183 clip~ 1e-05 1.00001;
+#X obj 199 132 -~ 0.333333;
+#X obj 377 139 *~ 3;
+#X obj 377 189 wrap~;
+#X obj 377 164 clip~ 1e-05 1.00001;
+#X obj 103 207 outlet~;
+#X obj 198 237 outlet~;
+#X obj 377 237 outlet~;
+#X connect 0 0 1 0;
+#X connect 0 0 7 0;
+#X connect 0 0 8 0;
+#X connect 1 0 3 0;
+#X connect 2 0 11 0;
+#X connect 3 0 2 0;
+#X connect 4 0 6 0;
+#X connect 5 0 12 0;
+#X connect 6 0 5 0;
+#X connect 7 0 4 0;
+#X connect 8 0 10 0;
+#X connect 9 0 13 0;
+#X connect 10 0 9 0;
+#X restore 9 207 pd hueToRgb;
+#X obj 9 119 *~ 1;
+#N canvas 591 405 523 367 gemrendering 0;
+#X obj 27 30 gemhead;
+#X obj 27 171 pix_texture;
+#X obj 120 17 inlet~;
+#X obj 191 17 inlet~;
+#X obj 261 17 inlet~;
+#X obj 27 196 rotateXYZ 0 0 90;
+#X obj 321 17 inlet~;
+#X obj 27 295 square 2;
+#X obj 27 258 translateXYZ 2 0 0;
+#X obj 27 226 scaleXYZ 1 1 1;
+#X obj 26 136 pix_sig2pix~ 256 256;
+#X obj 380 10 block~ 65536 128;
+#X connect 0 0 10 0;
+#X connect 1 0 5 0;
+#X connect 2 0 10 0;
+#X connect 3 0 10 1;
+#X connect 4 0 10 2;
+#X connect 5 0 9 0;
+#X connect 6 0 10 3;
+#X connect 8 0 7 0;
+#X connect 9 0 8 0;
+#X connect 10 0 1 0;
+#X restore 9 235 pd gemrendering;
+#X obj 9 33 *~ 1;
+#X obj 139 8 inlet~;
+#X obj 139 91 *~;
+#X obj 170 91 *~;
+#X obj 139 58 rfft~;
+#X obj 139 173 clip~ 0 1;
+#X obj 139 149 /~ 511;
+#N canvas 300 485 450 300 hueToRgb 0;
+#X obj 138 53 inlet~;
+#X obj 103 131 -~ 0.666666;
+#X obj 103 182 clip~ 0 1;
+#X obj 103 156 *~ 3;
+#X obj 199 157 *~ 3;
+#X obj 199 208 wrap~;
+#X obj 199 183 clip~ 1e-05 1.00001;
+#X obj 199 132 -~ 0.333333;
+#X obj 377 139 *~ 3;
+#X obj 377 189 wrap~;
+#X obj 377 164 clip~ 1e-05 1.00001;
+#X obj 103 207 outlet~;
+#X obj 198 237 outlet~;
+#X obj 377 237 outlet~;
+#X connect 0 0 1 0;
+#X connect 0 0 7 0;
+#X connect 0 0 8 0;
+#X connect 1 0 3 0;
+#X connect 2 0 11 0;
+#X connect 3 0 2 0;
+#X connect 4 0 6 0;
+#X connect 5 0 12 0;
+#X connect 6 0 5 0;
+#X connect 7 0 4 0;
+#X connect 8 0 10 0;
+#X connect 9 0 13 0;
+#X connect 10 0 9 0;
+#X restore 139 207 pd hueToRgb;
+#X obj 139 119 *~ 1;
+#N canvas 463 446 562 351 gemrendering 0;
+#X obj 27 30 gemhead;
+#X obj 27 171 pix_texture;
+#X obj 120 17 inlet~;
+#X obj 191 17 inlet~;
+#X obj 261 17 inlet~;
+#X obj 27 196 rotateXYZ 0 0 90;
+#X obj 321 17 inlet~;
+#X obj 27 295 square 2;
+#X obj 27 226 scaleXYZ 1 1 1;
+#X obj 27 257 translateXYZ -2 0 0;
+#X obj 381 10 block~ 65536 128;
+#X obj 27 136 pix_sig2pix~ 256 256;
+#X connect 0 0 11 0;
+#X connect 1 0 5 0;
+#X connect 2 0 11 0;
+#X connect 3 0 11 1;
+#X connect 4 0 11 2;
+#X connect 5 0 8 0;
+#X connect 6 0 11 3;
+#X connect 8 0 9 0;
+#X connect 9 0 7 0;
+#X connect 11 0 1 0;
+#X restore 139 235 pd gemrendering;
+#X obj 139 33 *~ 1;
+#X obj 266 147 sel 1 0;
+#X obj 364 225 gemwin;
+#X msg 496 228 destroy;
+#X msg 367 184 create \, 1;
+#X obj 224 37 loadbang;
+#X obj 266 67 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 204 104 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 228 104 hsl 96 15 1 100 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 224 62 f 0;
+#X obj 361 38 declare -lib Gem;
+#X obj 306 276 switch~ 512 4;
+#X connect 0 0 9 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 3 0 1 0;
+#X connect 3 0 1 1;
+#X connect 3 1 2 0;
+#X connect 3 1 2 1;
+#X connect 4 0 6 0;
+#X connect 5 0 4 0;
+#X connect 6 0 8 0;
+#X connect 6 1 8 1;
+#X connect 6 2 8 2;
+#X connect 7 0 5 0;
+#X connect 9 0 3 0;
+#X connect 10 0 19 0;
+#X connect 11 0 17 0;
+#X connect 12 0 17 0;
+#X connect 13 0 11 0;
+#X connect 13 0 11 1;
+#X connect 13 1 12 0;
+#X connect 13 1 12 1;
+#X connect 14 0 16 0;
+#X connect 15 0 14 0;
+#X connect 16 0 18 0;
+#X connect 16 1 18 1;
+#X connect 16 2 18 2;
+#X connect 17 0 15 0;
+#X connect 19 0 13 0;
+#X connect 20 0 23 0;
+#X connect 20 1 22 0;
+#X connect 22 0 21 0;
+#X connect 23 0 21 0;
+#X connect 24 0 28 0;
+#X connect 25 0 28 0;
+#X connect 26 0 20 0;
+#X connect 26 0 30 0;
+#X connect 27 0 19 1;
+#X connect 27 0 9 1;
+#X connect 28 0 26 0;
+#X coords 0 -1 1 1 130 24 2 200 100;
+#X restore 703 746 pd sonogram~;
+#X obj 594 570 vd~ \$0-delay1, f 16;
+#X text 730 570 x[n-t];
+#X obj 954 570 vd~ \$0-delay1, f 16;
+#X obj 752 103 delwrite~ \$0-delay1 5000;
+#X text 674 192 <- En phase : 0;
+#X text 728 222 En opposition de phase : 0.5 ->;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 1 0 35 0;
+#X connect 6 0 22 0;
+#X connect 6 0 53 0;
+#X connect 7 0 52 0;
+#X connect 7 0 17 0;
+#X connect 7 0 16 0;
+#X connect 7 0 11 0;
+#X connect 11 0 12 0;
+#X connect 16 0 10 0;
+#X connect 17 0 9 0;
+#X connect 21 0 22 1;
+#X connect 21 0 53 1;
+#X connect 23 0 24 0;
+#X connect 24 0 18 0;
+#X connect 24 0 36 0;
+#X connect 25 0 37 1;
+#X connect 25 0 38 1;
+#X connect 31 0 35 1;
+#X connect 31 0 36 1;
+#X connect 32 0 33 1;
+#X connect 32 0 34 1;
+#X connect 33 0 20 0;
+#X connect 33 0 56 0;
+#X connect 34 0 13 0;
+#X connect 34 0 54 0;
+#X connect 35 0 34 0;
+#X connect 36 0 33 0;
+#X connect 37 0 6 1;
+#X connect 38 0 21 0;
+#X connect 39 0 0 0;
+#X connect 40 0 23 0;
+#X connect 41 0 42 0;
+#X connect 41 0 46 0;
+#X connect 42 0 39 0;
+#X connect 42 1 43 0;
+#X connect 43 0 39 1;
+#X connect 44 0 6 0;
+#X connect 45 0 21 1;
+#X connect 46 0 40 0;
+#X connect 46 1 47 0;
+#X connect 47 0 40 1;
+#X connect 48 0 44 0;
+#X connect 48 0 45 0;
+#X connect 48 0 57 0;
+#X connect 49 0 48 0;
+#X connect 52 0 8 0;
+#X connect 54 0 37 0;
+#X connect 56 0 38 0;

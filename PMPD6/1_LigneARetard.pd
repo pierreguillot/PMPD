@@ -1,0 +1,221 @@
+#N canvas 598 72 492 615 10;
+#X obj 20 460 pad.output2~;
+#X obj 98 387 delread~ \$0-delay 300;
+#X obj 19 172 delwrite~ \$0-delay 1000;
+#X obj 20 316 delread~ \$0-delay 500;
+#X text 25 145 Enregistrement du signal;
+#X text 167 161 Argument 1 : nom de la ligne à retard;
+#X text 157 313 Argument 1 : nom de la ligne à retard;
+#N canvas 685 65 755 424 synthesis 0;
+#X obj 399 34 r \$0-tremolo;
+#X text 171 118 Low Frequency Oscillator;
+#X obj 398 231 nbx 5 14 -1e+37 1e+37 0 0 \$0-rate empty empty 0 -8
+0 10 -262144 -1 -1 2 256;
+#X text 470 227 Rate (Hz);
+#X obj 38 88 r \$0-rate;
+#X obj 17 337 *~;
+#X obj 38 221 *~, f 9;
+#X obj 107 195 line~;
+#X msg 107 170 \$1 20;
+#X obj 396 10 array define \$0-env 515;
+#X obj 508 128 nbx 5 14 1e-05 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 200 256;
+#X obj 511 98 hsl 128 15 1e-05 100000 1 0 empty \$0-baseN empty -2
+-8 0 10 -262144 -1 -1 9272 1;
+#X msg 453 98 set \$1;
+#N canvas 0 22 450 300 gen_waveform 0;
+#N canvas 0 22 450 300 counter 0;
+#X obj 66 121 until;
+#X obj 66 96 f 512;
+#X obj 66 146 f 0, f 8;
+#X obj 146 146 + 1;
+#X obj 66 46 inlet;
+#X obj 66 71 t b b, f 8;
+#X obj 127 96 f 0;
+#X obj 66 171 outlet;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 2 0 3 0;
+#X connect 2 0 7 0;
+#X connect 3 0 2 1;
+#X connect 4 0 5 0;
+#X connect 5 0 1 0;
+#X connect 5 1 6 0;
+#X connect 6 0 2 1;
+#X restore 55 114 pd counter;
+#X obj 55 163 / 512;
+#X obj 55 258 array set \$0-env, f 28;
+#X obj 55 139 t f f, f 14;
+#X obj 164 226 + 1;
+#X obj 55 36 sel 1;
+#X obj 55 61 f 1.00001;
+#N canvas 0 22 454 386 maplogn 0;
+#X obj 190 167 *;
+#N canvas 0 22 450 300 1- 0;
+#X obj 160 73 t b f;
+#X obj 160 98 f 1;
+#X obj 160 123 -, f 5;
+#X obj 160 46 inlet;
+#X obj 160 148 outlet;
+#X connect 0 0 1 0;
+#X connect 0 1 2 1;
+#X connect 1 0 2 0;
+#X connect 2 0 4 0;
+#X connect 3 0 0 0;
+#X restore 211 141 pd 1-;
+#N canvas 0 22 450 300 1/ 0;
+#X obj 61 59 t b f;
+#X obj 61 84 f 1;
+#X obj 61 109 /, f 5;
+#X obj 61 34 inlet;
+#X obj 61 134 outlet;
+#X connect 0 0 1 0;
+#X connect 0 1 2 1;
+#X connect 1 0 2 0;
+#X connect 2 0 4 0;
+#X connect 3 0 0 0;
+#X restore 277 29 pd 1/;
+#X obj 190 192 +, f 5;
+#X obj 190 217 log;
+#X obj 190 242 /, f 10;
+#X obj 267 217 log;
+#X obj 190 297 outlet;
+#X obj 317 3 inlet;
+#X obj 190 4 inlet;
+#X obj 190 267 + 1;
+#X connect 0 0 3 0;
+#X connect 1 0 0 1;
+#X connect 2 0 1 0;
+#X connect 2 0 3 1;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 10 0;
+#X connect 6 0 5 1;
+#X connect 8 0 2 0;
+#X connect 8 0 6 0;
+#X connect 9 0 0 0;
+#X connect 10 0 7 0;
+#X restore 55 197 pd maplogn;
+#X obj 55 86 t b f, f 10;
+#N canvas 0 22 450 300 mapcos 0;
+#X obj 79 81 * 6.28319;
+#X obj 79 106 - 3.14159;
+#X obj 79 159 + 1;
+#X obj 79 182 * 0.5;
+#X obj 79 134 cos;
+#X obj 79 27 inlet;
+#X obj 79 207 outlet;
+#X connect 0 0 1 0;
+#X connect 1 0 4 0;
+#X connect 2 0 3 0;
+#X connect 3 0 6 0;
+#X connect 4 0 2 0;
+#X connect 5 0 0 0;
+#X restore 55 226 pd mapcos;
+#X obj 54 14 inlet;
+#X connect 0 0 3 0;
+#X connect 1 0 7 0;
+#X connect 3 0 1 0;
+#X connect 3 1 4 0;
+#X connect 4 0 2 1;
+#X connect 5 0 6 0;
+#X connect 5 1 8 0;
+#X connect 6 0 8 0;
+#X connect 7 0 9 0;
+#X connect 8 0 0 0;
+#X connect 8 1 7 1;
+#X connect 9 0 2 0;
+#X connect 10 0 5 0;
+#X restore 508 173 pd gen_waveform;
+#X obj 38 120 tabosc4~ \$0-env;
+#X obj 38 310 +~, f 10;
+#X obj 114 246 sig~ 1;
+#X obj 114 271 -~;
+#X obj 453 201 nbx 5 14 -1e+37 1e+37 0 0 \$0-depth empty empty 0 -8
+0 10 -262144 -1 -1 1 256;
+#X obj 17 362 outlet~;
+#X text 85 363 Input 1;
+#X obj 398 60 route rate depth base;
+#X obj 107 147 r \$0-depth;
+#X text 514 199 Depth (0-1);
+#X obj 666 97 f \$1;
+#X obj 666 72 loadbang;
+#X obj 666 122 sel 0;
+#X msg 666 147 1.00001;
+#X obj 17 50 noise~, f 7;
+#X msg 613 355 base 200;
+#X obj 453 310 loadbang;
+#X obj 453 380 s \$0-tremolo;
+#X msg 453 355 rate 2;
+#X msg 523 355 depth 1;
+#X connect 0 0 21 0;
+#X connect 4 0 14 0;
+#X connect 5 0 19 0;
+#X connect 6 0 15 0;
+#X connect 7 0 6 1;
+#X connect 7 0 17 1;
+#X connect 8 0 7 0;
+#X connect 10 0 12 0;
+#X connect 10 0 13 0;
+#X connect 11 0 10 0;
+#X connect 12 0 11 0;
+#X connect 14 0 6 0;
+#X connect 15 0 5 1;
+#X connect 16 0 17 0;
+#X connect 17 0 15 1;
+#X connect 21 0 2 0;
+#X connect 21 1 18 0;
+#X connect 21 2 11 0;
+#X connect 22 0 8 0;
+#X connect 24 0 26 0;
+#X connect 25 0 24 0;
+#X connect 26 0 27 0;
+#X connect 26 1 11 0;
+#X connect 27 0 11 0;
+#X connect 28 0 5 0;
+#X connect 29 0 31 0;
+#X connect 30 0 32 0;
+#X connect 30 0 33 0;
+#X connect 30 0 29 0;
+#X connect 32 0 31 0;
+#X connect 33 0 31 0;
+#X restore 19 121 pd synthesis;
+#X text 97 365 Lecture du signal après 300 ms;
+#X text 19 295 Lecture du signal après 500 ms;
+#X text 11 219 Il est nécessaire de donner un nom à la ligne à retard
+pour que l'objet permettant la lecture puisse se rattacher à l'objet
+qui écrit dans le buffer. Le retard maximum permet de déterminer
+la taille de buffer à allouer \, par défaut la taille est nulle rendant
+impossible l'enregistrement et donc la lecture \, il est donc nécessaire
+de définir cet argument., f 77;
+#N canvas 436 46 450 300 header 0;
+#X obj 101 103 cnv 15 30 15 empty empty La 2 8 0 14 -262144 -66577
+0;
+#X obj 121 103 cnv 15 30 15 empty empty ligne 2 8 0 14 -262144 -66577
+0;
+#X obj 166 103 cnv 15 20 15 empty empty à 2 8 0 14 -262144 -66577
+0;
+#X obj 178 103 cnv 15 30 15 empty empty retard 2 8 0 14 -262144 -66577
+0;
+#X coords 0 -1 1 1 466 20 2 100 100;
+#X restore 12 9 pd header;
+#X text 167 181 Argument 2 : temps de retard maximum en millisecondes
+, f 51;
+#X text 157 331 Argument 2 : temps de retard par défaut en millisecondes
+, f 53;
+#X text 11 39 Le retard temporel est une technique à la base de nombreux
+traitements tels que la réverbération \, le flanging \, la synthèse
+granulaire quasi-synchrone \, etc. Le module permettant d'appliquer
+un retard temporel à un signal est appelé "ligne à retard" (delay
+line). Il enregistre un signal dans un buffer (une mémoire tampon)
+avant de renvoyer ce signal après une certaine période., f 77;
+#X text 11 519 Il est possible d'avoir plusieurs objets de lecture
+pour une même ligne à retard \, il suffit pour cela de dupliquer
+les objets de lecture associés à un objet d'enregistrement. Cependant
+\, il n'est pas possible d'avoir plusieurs objets d'enregistrement
+pour une même ligne à retard. Enfin le temps de retard par défaut
+est facultatif \, il est possible de redéfinir sa valeur après la
+création de l'objet., f 77;
+#X connect 1 0 0 1;
+#X connect 3 0 0 0;
+#X connect 7 0 2 0;

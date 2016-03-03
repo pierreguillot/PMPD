@@ -1,0 +1,52 @@
+#N canvas 163 23 1245 640 12;
+#X obj 26 93 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 34 256;
+#X obj 26 152 + 1;
+#X obj 26 255 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 35 256;
+#X text 22 16 Une des premières opérations que nous pouvons réaliser
+est une addition :, f 35;
+#X text 86 246 Boite nombre \, elle affiche le résultat de l'addition.
+, f 27;
+#X obj 651 93 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 111 256;
+#X obj 651 332 + 1, f 4;
+#X obj 651 475 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 112 256;
+#X text 711 466 Boite nombre \, elle affiche le résultat de l'addition.
+, f 27;
+#X text 527 16 Il est possible de modifier le deuxième terme de l'addition
+:, f 35;
+#X obj 680 153 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 23 256;
+#X text 86 87 Boite nombre \, elle définit le premier terme de l'addition.
+, f 27;
+#X text 743 147 Boite nombre \, elle définit le deuxième terme de
+l'addition., f 30;
+#X text 706 315 Objet "+" \, il réalise une addition. L'argument de
+l'objet \, en l'occurrence 1 est le deuxième terme par défaut. Il
+peut être changé avec un message dans le deuxième inlet. Le deuxième
+inlet est "froid" \, il faut renvoyer le premier terme dans l'inlet
+"chaud" pour réaliser l'opération., f 46;
+#X text 711 87 Boite nombre \, elle définit le premier terme de l'addition.
+, f 34;
+#X text 362 241 L'inlet 1 définit le premier terme de l'addition \,
+il est chaud donc il garde en mémoire ce premier terme et calcule
+l'addition., f 36;
+#X text 61 145 Objet "+" \, il réalise une addition. Le deuxième
+terme de l'addition est défini par l'argument de l'objet \, en l'occurrence
+1, f 30;
+#X text 54 530 Attention : Dans Pure Data \, tous les nombres sont
+considérés comme flottant (à virgule) \, dans Max les nombres sont
+soit des entiers (sans virgules) \, soit des flottants (avec virgule).
+Pour réaliser des opérations sur des nombres flottants dans Max \,
+il faut que l'argument des objets soient des nombres flottant sinon
+par défaut \, il transforme les nombres en entier., f 96;
+#X text 687 238 L'inlet 2 définit le deuxième terme de l'addition
+\, il est froid donc il garde en mémoire ce deuxième terme mais ne
+calcule pas l'addition., f 44;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 10 0 6 1;

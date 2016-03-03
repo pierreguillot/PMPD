@@ -1,0 +1,39 @@
+#N canvas 261 172 849 629 12;
+#X obj 38 296 *~ 0.5;
+#X obj 38 401 dac~ 1 2;
+#X msg 142 372 \; pd dsp 1;
+#X msg 143 427 \; pd dsp 0;
+#X text 215 381 On;
+#X text 215 435 Off;
+#X obj 38 161 osc~ 220, f 9;
+#X obj 38 84 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 233 256;
+#X text 123 152 L'argument est la fréquence par défaut de l'oscillateur.
+, f 29;
+#X text 36 59 Le premier inlet définit la fréquence de l'oscillateur.
+;
+#X obj 107 114 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0.71 256;
+#X text 163 89 Le deuxième inlet définit la phase de l'oscillateur
+entre 0 et 1, f 30;
+#X text 24 14 Il est possible de créer un oscillateur qui génère
+un cosinus avec osc~ pour Pure Data ou cyle~ pour Max.;
+#X obj 83 245 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0.5 256;
+#X msg 83 205 1;
+#X msg 123 205 0.5;
+#X msg 163 205 0;
+#X text 174 237 Il est possible de modifier l'amplitude du signal.
+Attention aux oreilles !!!!, f 26;
+#X text 29 483 Tips : Il faut utiliser shift pendant le 'click and
+drag' des boites nombres pour changer la valeur avec plus de précision.
+;
+#X connect 0 0 1 0;
+#X connect 0 0 1 1;
+#X connect 6 0 0 0;
+#X connect 7 0 6 0;
+#X connect 10 0 6 1;
+#X connect 13 0 0 1;
+#X connect 14 0 13 0;
+#X connect 15 0 13 0;
+#X connect 16 0 13 0;

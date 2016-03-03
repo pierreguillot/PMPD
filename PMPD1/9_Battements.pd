@@ -1,0 +1,56 @@
+#N canvas 233 29 914 693 12;
+#X obj 268 647 dac~ 1 2;
+#X msg 598 21 \; pd dsp 1;
+#X msg 599 76 \; pd dsp 0;
+#X text 671 30 On;
+#X text 671 84 Off;
+#X obj 289 453 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 102 256;
+#X obj 289 498 dbtorms;
+#X msg 289 526 \$1 20;
+#X obj 289 472 clip 0 100;
+#X obj 289 551 line~;
+#X obj 268 592 *~;
+#X obj 349 249 + 1, f 5;
+#X obj 268 193 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 237 256;
+#X text 288 429 Gain :;
+#X text 30 15 Dans cet exemple \, on utilise des oscillateurs avec
+une petite différence de fréquence pour créer des battements.;
+#X obj 268 378 +~;
+#X text 310 377 On additionne les signaux;
+#X obj 349 191 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 48 256;
+#X obj 268 308 osc~ 220, f 9;
+#X obj 349 308 osc~ 221, f 9;
+#X obj 349 210 t b f;
+#X text 146 177 Fréquence fondamentale (Hz), f 13;
+#X msg 268 153 220;
+#X obj 268 111 loadbang;
+#X text 343 96 Envoie un bang à l'ouverture du patch, f 17;
+#X obj 349 282 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 285 256;
+#X text 409 232 Si la valeur est négative cela devient la fondamentale.
+;
+#X text 409 252 Si la valeur est trop grande \, les deux fréquences
+se dissocient.;
+#X text 411 189 Nombre de battements par seconde (en Hz), f 21;
+#X connect 5 0 8 0;
+#X connect 6 0 7 0;
+#X connect 7 0 9 0;
+#X connect 8 0 6 0;
+#X connect 9 0 10 1;
+#X connect 10 0 0 0;
+#X connect 10 0 0 1;
+#X connect 11 0 25 0;
+#X connect 12 0 11 0;
+#X connect 12 0 18 0;
+#X connect 15 0 10 0;
+#X connect 17 0 20 0;
+#X connect 18 0 15 0;
+#X connect 19 0 15 1;
+#X connect 20 0 11 0;
+#X connect 20 1 11 1;
+#X connect 22 0 12 0;
+#X connect 23 0 22 0;
+#X connect 25 0 19 0;

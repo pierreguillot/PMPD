@@ -1,0 +1,34 @@
+#N canvas 96 41 791 437 12;
+#X obj 19 376 dac~ 1 2;
+#X msg 259 7 \; pd dsp 1;
+#X msg 352 7 \; pd dsp 0;
+#X obj 19 88 osc~ 221, f 9;
+#X obj 19 62 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X text 10 15 Ondes;
+#X obj 19 325 GainMono~;
+#X obj 279 376 dac~ 1 2;
+#X obj 279 62 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 0 256;
+#X obj 279 325 GainMono~;
+#X obj 279 88 phasor~ 221;
+#X obj 33 133 Scope~;
+#X obj 293 133 Scope~;
+#X obj 529 376 dac~ 1 2;
+#X obj 529 325 GainMono~;
+#X obj 543 133 Scope~;
+#X obj 529 88 noise~;
+#X connect 3 0 6 0;
+#X connect 3 0 11 0;
+#X connect 4 0 3 0;
+#X connect 6 0 0 0;
+#X connect 6 0 0 1;
+#X connect 8 0 10 0;
+#X connect 9 0 7 0;
+#X connect 9 0 7 1;
+#X connect 10 0 9 0;
+#X connect 10 0 12 0;
+#X connect 14 0 13 0;
+#X connect 14 0 13 1;
+#X connect 16 0 14 0;
+#X connect 16 0 15 0;

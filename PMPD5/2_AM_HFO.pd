@@ -1,0 +1,180 @@
+#N struct 1188-template-slider float xl float xr;
+#N struct 1191-template-master float x float x2 float color float colort
+float xs float ys symbol sym;
+#N struct 1193-template-master float x float x2 float color float colort
+float xs float ys symbol sym;
+#N struct 1195-template-master float x float x2 float color float colort
+float xs float ys symbol sym;
+#N canvas 47 23 1329 803 12;
+#X msg 692 13 \; pd dsp 1;
+#X msg 691 58 \; pd dsp 0;
+#X obj 917 402 nbx 5 14 -1e+37 1e+37 0 0 empty \$0-modulante empty
+0 -8 0 10 -262144 -1 -1 5000 256;
+#X obj 896 679 *~;
+#X obj 917 583 *~, f 9;
+#X obj 986 557 line~;
+#X msg 986 532 \$1 20;
+#X obj 986 509 nbx 5 14 0 1 0 0 empty \$0-indice empty 0 -8 0 10 -262144
+-1 -1 1 256;
+#X obj 917 637 +~ 1;
+#X obj 917 422 osc~;
+#X obj 917 480 -~ 1;
+#X obj 917 533 *~ 0.5;
+#X obj 806 2 pad.audioplayer~;
+#X obj 896 212 noise~;
+#X obj 896 734 pad.output~;
+#N canvas 0 23 450 300 init 0;
+#X msg 50 136 1;
+#X obj 67 48 loadbang;
+#X obj 65 191 s \$0-scopes;
+#X obj 264 237 s \$0-inputi;
+#X msg 95 136 ampscale 2;
+#X msg 312 113 10000;
+#X obj 310 156 s \$0-porteusei;
+#X obj 309 86 s \$0-modulantei;
+#X msg 312 43 5000;
+#X msg 264 212 2;
+#X obj 171 252 s \$0-indice;
+#X connect 0 0 2 0;
+#X connect 0 0 10 0;
+#X connect 1 0 0 0;
+#X connect 1 0 9 0;
+#X connect 1 0 4 0;
+#X connect 1 0 5 0;
+#X connect 1 0 8 0;
+#X connect 4 0 2 0;
+#X connect 5 0 6 0;
+#X connect 8 0 7 0;
+#X connect 9 0 3 0;
+#X restore 623 10 pd init;
+#X obj 904 327 s~ \$0-prefx;
+#X obj 904 704 s~ \$0-postfx;
+#X text 1047 505 <- indice de modulation f [0 \, 1];
+#X text 15 13 La modulation d'amplitude (AM) :;
+#X obj 896 302 *~ 1, f 9;
+#X obj 1087 22 vradio 20 1 0 3 \$0-input \$0-inputi empty 0 -8 0 10
+-262144 -1 -1 2;
+#X text 1110 21 Fichier son;
+#X text 1110 41 Bruit blanc;
+#X text 1110 61 Oscillateur;
+#N canvas 0 22 450 300 gate-0 0;
+#X obj 93 33 r \$0-input;
+#X obj 93 58 == 0;
+#X obj 24 82 *~ 0, f 9;
+#X obj 24 58 inlet~;
+#X obj 24 107 outlet~;
+#X connect 0 0 1 0;
+#X connect 1 0 2 1;
+#X connect 2 0 4 0;
+#X connect 3 0 2 0;
+#X restore 806 236 pd gate-0;
+#N canvas 0 22 450 300 gate-1 0;
+#X obj 93 33 r \$0-input;
+#X obj 24 82 *~ 0, f 9;
+#X obj 24 58 inlet~;
+#X obj 24 107 outlet~;
+#X obj 93 58 == 1;
+#X connect 0 0 4 0;
+#X connect 1 0 3 0;
+#X connect 2 0 1 0;
+#X connect 4 0 1 1;
+#X restore 896 236 pd gate-1;
+#N canvas 0 22 450 300 gate-2 0;
+#X obj 93 33 r \$0-input;
+#X obj 24 82 *~ 0, f 9;
+#X obj 24 58 inlet~;
+#X obj 24 107 outlet~;
+#X obj 93 58 == 2;
+#X connect 0 0 4 0;
+#X connect 1 0 3 0;
+#X connect 2 0 1 0;
+#X connect 4 0 1 1;
+#X restore 986 236 pd gate-2;
+#X obj 34 176 pad.spectrogram~;
+#X obj 287 152 r \$0-scopes;
+#X text 100 440 Spectre avant traitement;
+#X obj 34 152 r~ \$0-prefx;
+#X obj 34 486 pad.spectrogram~;
+#X obj 287 462 r \$0-scopes;
+#X obj 34 462 r~ \$0-postfx;
+#X text 100 750 Spectre après traitement;
+#X obj 489 158 nbx 5 14 -1e+37 1e+37 0 0 \$0-porteuse \$0-porteusei
+empty 0 -8 0 10 -262144 -1 -1 10000 256;
+#X text 486 136 Porteuse;
+#X obj 579 158 nbx 5 14 -1e+37 1e+37 0 0 \$0-modulante \$0-modulantei
+empty 0 -8 0 10 -262144 -1 -1 5000 256;
+#X text 576 136 Modulante;
+#X obj 986 191 nbx 5 14 -1e+37 1e+37 0 0 empty \$0-porteuse empty 0
+-8 0 10 -262144 -1 -1 10000 256;
+#X obj 494 205 nbx 5 14 -1e+37 1e+37 0 0 empty \$0-porteuse empty 0
+-8 0 10 -262144 -1 -1 10000 256;
+#X obj 598 205 nbx 5 14 -1e+37 1e+37 0 0 empty \$0-modulante empty
+0 -8 0 10 -262144 -1 -1 5000 256;
+#X text 494 178 Re-synthèse :;
+#X obj 598 224 t b f;
+#X obj 574 269 +, f 5;
+#X obj 624 269 -, f 5;
+#X obj 986 212 osc~;
+#X obj 494 286 osc~;
+#X obj 574 306 osc~;
+#X obj 624 306 osc~;
+#X obj 494 486 pad.spectrogram~;
+#X obj 747 462 r \$0-scopes;
+#X obj 494 462 r~ \$0-syn;
+#X obj 494 408 pad.output~;
+#X obj 574 331 /~ 2;
+#X obj 624 331 /~ 2;
+#X obj 598 411 s~ \$0-syn;
+#X obj 494 372 *~ 0.5;
+#X text 15 34 Lorsque la modulante est de haute fréquence \, de nouveaux
+harmoniques apparaissent. Lorsque la porteuse est génére par un oscillateur
+sinusoïdal de fréquence fp \, deux harmoniques apparaissent selon
+la fréquence fm de la modulante : fp-fm et fp+fm. Ainsi pour tous
+harmoniques de la porteuse \, apparaissent deux autres harmoniques
+dont les fréquences sont relatives à celle de la modulante. Leur
+amplitude est divisée par deux par rapport à l'ampltiude originale.
+, f 83;
+#X text 560 750 Spectre de la synthèse;
+#X connect 2 0 9 0;
+#X connect 3 0 14 0;
+#X connect 3 0 17 0;
+#X connect 4 0 8 0;
+#X connect 5 0 4 1;
+#X connect 6 0 5 0;
+#X connect 7 0 6 0;
+#X connect 8 0 3 1;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 11 0 4 0;
+#X connect 12 0 25 0;
+#X connect 13 0 26 0;
+#X connect 20 0 3 0;
+#X connect 20 0 16 0;
+#X connect 25 0 20 0;
+#X connect 26 0 20 0;
+#X connect 27 0 20 0;
+#X connect 29 0 28 1;
+#X connect 31 0 28 0;
+#X connect 33 0 32 1;
+#X connect 34 0 32 0;
+#X connect 40 0 47 0;
+#X connect 41 0 45 0;
+#X connect 41 0 48 0;
+#X connect 41 0 46 0;
+#X connect 42 0 44 0;
+#X connect 44 0 45 0;
+#X connect 44 0 46 0;
+#X connect 44 1 45 1;
+#X connect 44 1 46 1;
+#X connect 45 0 49 0;
+#X connect 46 0 50 0;
+#X connect 47 0 27 0;
+#X connect 48 0 58 0;
+#X connect 49 0 55 0;
+#X connect 50 0 56 0;
+#X connect 52 0 51 1;
+#X connect 53 0 51 0;
+#X connect 55 0 58 0;
+#X connect 56 0 58 0;
+#X connect 58 0 54 0;
+#X connect 58 0 57 0;

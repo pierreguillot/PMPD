@@ -1,0 +1,26 @@
+#N canvas 162 30 1030 727 12;
+#X obj 106 122 nbx 5 14 0 100 0 0 empty empty empty 0 -8 0 10 -262144
+-1 -1 0 256;
+#X obj 106 171 dbtorms;
+#X msg 106 199 \$1 20;
+#X obj 106 145 clip 0 100;
+#X obj 106 224 line~;
+#X obj 85 265 *~;
+#X text 105 102 Gain :;
+#X obj 85 71 inlet~;
+#X obj 85 290 outlet~;
+#X text 162 119 dB;
+#X obj 195 265 *~;
+#X obj 216 71 inlet~;
+#X obj 195 290 outlet~;
+#X connect 0 0 3 0;
+#X connect 1 0 2 0;
+#X connect 2 0 4 0;
+#X connect 3 0 1 0;
+#X connect 4 0 5 1;
+#X connect 4 0 10 0;
+#X connect 5 0 8 0;
+#X connect 7 0 5 0;
+#X connect 10 0 12 0;
+#X connect 11 0 10 1;
+#X coords 0 -1 1 1 85 40 2 100 100;

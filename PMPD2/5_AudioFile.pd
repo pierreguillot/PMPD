@@ -1,0 +1,33 @@
+#N canvas 110 35 511 372 12;
+#X obj 18 315 dac~ 1 2;
+#X msg 259 7 \; pd dsp 1;
+#X msg 260 62 \; pd dsp 0;
+#X obj 18 208 readsf~ 2, f 21;
+#X obj 183 233 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 18 103 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 18 131 t f b;
+#X obj 183 276 s \$0-start;
+#X obj 18 71 r \$0-start;
+#X obj 183 252 f 0;
+#X obj 204 209 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 18 265 GainStereo~;
+#X msg 55 162 open Son1.wav;
+#X text 10 15 Lecture d'un fichier son;
+#X text 223 208 Loop;
+#X text 37 100 Start/Stop;
+#X connect 3 0 11 0;
+#X connect 3 1 11 1;
+#X connect 3 2 4 0;
+#X connect 4 0 9 0;
+#X connect 5 0 6 0;
+#X connect 6 0 3 0;
+#X connect 6 1 12 0;
+#X connect 8 0 5 0;
+#X connect 9 0 7 0;
+#X connect 10 0 9 1;
+#X connect 11 0 0 0;
+#X connect 11 1 0 1;
+#X connect 12 0 3 0;

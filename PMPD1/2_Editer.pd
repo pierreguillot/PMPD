@@ -1,0 +1,13 @@
+#N canvas 109 188 631 397 12;
+#X text 25 156 Dans Max \, la touche "n" permet de créer un objet
+ou double cliquer sur le patch fait apparaitre une fenêtre avec tous
+les objets disponibles., f 67;
+#X text 25 16 Pour éditer un patch \, il faut le débloquer avec cmd+e
+dans sur Mac ou ctrl+e sur Windows. Dans Pure Data \, il est aussi
+possible d'utiliser le menu "Edit" -> "Edit Mode". Dans Max \, il est
+possible d'utiliser le petit verrou en bas à gauche., f 67;
+#X text 25 96 Dans Pure Data \, le menu "Put" permet de créer des
+boites (ou il est possible d'utiliser les raccourcis) :, f 67;
+#X text 25 226 Pour connecter deux boites \, il faut placer le curseur
+sur un outlet \, cliquer et relier la corde vers l'inlet d'une autre
+boite., f 67;
